@@ -8,6 +8,8 @@
 | email              | string | null: false, unique :true|
 | encrypted_password | string | null: false              |
 
+ - has_many :payments
+
 ## payments テーブル
 
 | Column            | Type      | Options                        |
@@ -17,3 +19,5 @@
 | category_id       | integer   | null: false                    |
 | memo              | text      |                                |
 | user              | reference | null: false, foreign_key: true |
+
+ - belongs_to :user
