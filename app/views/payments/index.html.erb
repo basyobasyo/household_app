@@ -1,1 +1,19 @@
+<%= render "shared/header" %>
+
 <p>Hello World</p>
+
+  <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
+    <select>
+      <option>一緒に使う相手を選んでください</option>
+      <% @user.each do |user| %>
+       <option><%= user.nickname %></option>
+      <% end %>
+    </select>
+
+    <div class="follow-btn-contents">
+      <%= f.submit "登録する" ,class:"follow-btn" %>
+    </div>
+
+  <% end %>
+
+
