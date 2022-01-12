@@ -2,13 +2,16 @@
 
 ## users テーブル
 
-| Column             | Type   | Options                  |
-| ------------------ | ------ | ------------------------ |
-| nickname           | string | null: false              |
-| email              | string | null: false, unique :true|
-| encrypted_password | string | null: false              |
+| Column             | Type      | Options                  |
+| ------------------ | --------- | ------------------------ |
+| nickname           | string    | null: false              |
+| email              | string    | null: false, unique :true|
+| encrypted_password | string    | null: false              |
+| pair_id            | reference | foreign_key :true        |
 
  - has_many :payments
+ - has_one :another
+ - belongs_to :pair
 
 ## payments テーブル
 
