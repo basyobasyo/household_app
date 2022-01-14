@@ -15,11 +15,13 @@ class PaymentsController < ApplicationController
   private
 
   def pair_check
-    @pair_check = User.exists?(pair_id: current_user.id)
-    if @pair_check
-      @pair_user = User.find(current_user.pair_id)
-    else
-      @pair_user = false
+    if user_signed_in?
+       @pair_check = User.exists?(pair_id: current_user.id)
+      if @pair_check
+       @pair_user = User.find(current_user.pair_id)
+      else
+       @pair_user = false
+      end
     end
   end
 end
