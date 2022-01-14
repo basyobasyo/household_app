@@ -2,21 +2,23 @@
 
 <p>Hello World</p>
 
+
   <% if user_signed_in? %>
-    <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
-      <select name="follow_id">
-        <option>一緒に使う相手を選んでください</option>
-        <% User.where.not(id: current_user.id).each do |user| %>
-        <option value=<%= user.id %>><%= user.nickname %></option>
-        <% end %>
-      </select>
-      <input name="another_id" type="hidden" value=<%= current_user.id %>>
+    <% unless @user %>
+      <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
+        <select name="follow_id">
+          <option>一緒に使う相手を選んでください</option>
+          <% User.where.not(id: current_user.id).each do |user| %>
+          <option value=<%= user.id %>><%= user.nickname %></option>
+          <% end %>
+        </select>
+        <input name="another_id" type="hidden" value=<%= current_user.id %>>
 
-      <div class="follow-btn-contents">
-        <%= f.submit "登録する" ,class:"follow-btn" %>
-      </div>
+        <div class="follow-btn-contents">
+          <%= f.submit "登録する" ,class:"follow-btn" %>
+        </div>
+      <% end %>
     <% end %>
-
   <% end %>
 
 

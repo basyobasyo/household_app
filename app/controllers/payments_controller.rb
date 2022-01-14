@@ -1,5 +1,8 @@
 class PaymentsController < ApplicationController
+  before_action :pair_check, only: :index
+
   def index
+
   end
 
   def follow
@@ -8,4 +11,11 @@ class PaymentsController < ApplicationController
     User.follow(@follow_id, @another_id)
     redirect_to root_path
   end
+
+  private
+
+  def pair_check
+    @user = User.exists?(pair_id: current_user.id)
+  end
 end
+
