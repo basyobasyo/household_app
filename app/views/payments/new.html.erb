@@ -20,6 +20,10 @@
     </div>
     <div>
       カテゴリーの選択<br/>
-      <%= %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"payment-category"}) %>
+    </div>
+    <div>
+      備考欄<br/>
+      <%= f.text_area :memo, class:"peyment-memo", id:"payment-info", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
     </div>
 <% end %>
