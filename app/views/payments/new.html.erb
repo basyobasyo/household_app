@@ -1,1 +1,25 @@
 <p>新規投稿ページです</p>
+
+<%= form_with(model: @payment, local: true) do |f| %>
+  <div>
+    支払い金額<br/>
+    <%= f.text_field :price, class:"paymente-text", id:"payment-info", placeholder:"支払い金額を入力してください" %>
+  </div>
+    <div class='input-payment-date'>
+      <%= raw sprintf(
+                  f.date_select(
+                    :redgistration_date,
+                    class:'select-date',
+                    id:"payment-date",
+                    use_month_numbers: true,
+                    prompt:'-',
+                    start_year: 2022,
+                    end_year: (Time.now.year),
+                    date_separator: '/'),
+                  "年", "月") %>
+    </div>
+    <div>
+      カテゴリーの選択<br/>
+      <%= %>
+    </div>
+<% end %>
