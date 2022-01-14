@@ -8,4 +8,15 @@ class User < ApplicationRecord
   foreign_key: "pair_id"
 
   belongs_to :pair, class_name: "User", optional: true
+
+  def self.follow(follow_id,another_id)
+    user = User.find(follow_id)
+    user.pair_id = another_id
+    another_user = User.find(another_id)
+    another_user.pair_id = follow_id
+
+    user.save
+    another_user.save
+  end
+
 end
