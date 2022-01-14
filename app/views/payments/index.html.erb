@@ -4,7 +4,7 @@
 
 
   <% if user_signed_in? %>
-    <% unless @user %>
+    <% unless @pair_check %>
       <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
         <select name="follow_id">
           <option>一緒に使う相手を選んでください</option>

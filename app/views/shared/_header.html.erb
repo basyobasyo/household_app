@@ -7,5 +7,8 @@
       <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
       <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
     <% end %>
+    <% if current_user.pair_id %>
+      <li> 共有先 <%= link_to @pair_user.nickname, "#", class: "pair_nickname" %></li>
+    <% end %>
   </ul>
 </header>
