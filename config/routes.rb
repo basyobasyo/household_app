@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "payments#index"
-  resources :payments, only: :index do
+  resources :payments, only: [:index, :new] do
     collection do
       post 'follow'
     end

@@ -2,7 +2,7 @@
 
 <p>Hello World</p>
 
-
+<%# ペア登録機能 %>
   <% if user_signed_in? %>
     <% unless @pair_check %>
       <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
@@ -20,5 +20,12 @@
       <% end %>
     <% end %>
   <% end %>
+<%# // ペア登録機能 %>
+
+<%# 新規購入フォーム %> 
+  <% if user_signed_in? %>
+    <%= link_to "新規入力画面に進む", new_payment_path %>
+  <% end %>
+<%# //新規購入フォーム %>
 
 
