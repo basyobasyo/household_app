@@ -28,4 +28,12 @@
   <% end %>
 <%# //新規購入フォーム %>
 
+<%# 支払い情報表示欄 %>
+  <% @payments.each do |payment| %>
+    <p> 日にち <%= payment.registration_date %></p>
+    <p> 金額 <%= payment.price %></p>
+    <%= link_to "編集する", "#" %>
+  <% end %>
+<%# // 支払い情報表示欄 %>
+
 

@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
 
   def index
+    @payments = Payment.all
   end
 
   def new
