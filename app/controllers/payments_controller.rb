@@ -9,7 +9,13 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    
+    @payment = Payment.new(payment_params)
+    binding.pry
+      if @payment.save
+        redirect_to root_path
+      else
+        render :new
+      end
   end
 
   def follow
