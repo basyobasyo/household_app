@@ -26,4 +26,8 @@
       備考欄<br/>
       <%= f.text_area :memo, class:"peyment-memo", id:"payment-info", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
     </div>
+    <div>
+      <%= f.submit "入力を保存する", class:"payment-btn" %><br/>
+      <%= link_to "トップページへ戻る", root_path, class:"back-btn" %>
+    </div>
 <% end %>
