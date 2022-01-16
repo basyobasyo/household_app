@@ -1,0 +1,31 @@
+<%= form_with(model: payment, local: true) do |f| %>
+  <div>
+    支払い金額<br/>
+    <%= f.text_field :price, class:"paymente-text", id:"payment-info", placeholder:"支払い金額を入力してください" %>
+  </div>
+    <div class='input-payment-date'>
+      <%= raw sprintf(
+                  f.date_select(
+                    :registration_date,
+                    class:'select-date',
+                    id:"payment-date",
+                    use_month_numbers: true,
+                    prompt:'-',
+                    start_year: 2022,
+                    end_year: (Time.now.year),
+                    date_separator: '/'),
+                  "年", "月") %>
+    </div>
+    <div>
+      カテゴリーの選択<br/>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"payment-category"}) %>
+    </div>
+    <div>
+      備考欄<br/>
+      <%= f.text_area :memo, class:"peyment-memo", id:"payment-info", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
+    </div>
+    <div>
+      <%= f.submit "入力を保存する", class:"payment-btn" %><br/>
+      <%= link_to "トップページへ戻る", root_path, class:"back-btn" %>
+    </div>
+<% end %>

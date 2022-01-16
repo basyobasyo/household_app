@@ -1,8 +1,38 @@
 class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
-
+  before_action :set_params, only: [:edit, :update, :destroy]
+ 
   def index
+    @payments = Payment.all
+  end
 
+  def new
+    @payment = Payment.new
+  end
+
+  def create
+    @payment = Payment.new(payment_params)
+      if @payment.save
+        redirect_to root_path
+      else
+        render :new
+      end
+  end
+
+  def edit
+  end
+
+  def update
+    if @payment.update(payment_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end 
+
+  def destroy
+    @payment.destroy
+    redirect_to root_path
   end
 
   def follow
@@ -24,5 +54,14 @@ class PaymentsController < ApplicationController
       end
     end
   end
+
+  def payment_params
+    params.require(:payment).permit(:price, :registration_date, :category_id, :memo).merge(user_id: current_user.id)
+  end
+
+  def set_params
+    @payment = Payment.find(params[:id])
+  end
+
 end
 
