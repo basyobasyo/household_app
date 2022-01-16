@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
-
+  before_action :set_params, only: :edit
+ 
   def index
     @payments = Payment.all
   end
@@ -16,6 +17,9 @@ class PaymentsController < ApplicationController
       else
         render :new
       end
+  end
+
+  def edit
   end
 
   def follow
@@ -40,6 +44,10 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:price, :registration_date, :category_id, :memo).merge(user_id: current_user.id)
+  end
+
+  def set_params
+    @payment = Payment.find(params[:id])
   end
 
 end
