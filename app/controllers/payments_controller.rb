@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
-  before_action :set_params, only: :edit
+  before_action :set_params, only: [:edit, :update, :destroy]
  
   def index
     @payments = Payment.all
@@ -23,13 +23,17 @@ class PaymentsController < ApplicationController
   end
 
   def update
-    payment = Payment.find(params[:id])
-    if payment.update(payment_params)
+    if @payment.update(payment_params)
       redirect_to root_path
     else
       render :edit
     end
   end 
+
+  def destroy
+    @payment.destroy
+    redirect_to root_path
+  end
 
   def follow
     @follow_id  = params[:follow_id]
