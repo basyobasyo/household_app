@@ -22,6 +22,15 @@ class PaymentsController < ApplicationController
   def edit
   end
 
+  def update
+    payment = Payment.find(params[:id])
+    if payment.update(payment_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end 
+
   def follow
     @follow_id  = params[:follow_id]
     @another_id = params[:another_id]
