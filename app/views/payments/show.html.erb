@@ -1,0 +1,10 @@
+<p>詳細ページです<p>
+
+<div>
+  <p><%= @payment.registration_date %>に購入したもの</p>
+  <p><%= @payment.category.name%></p>
+  <p><%= @payment.price%>
+  <p><%= @payment.memo%>
+</div>
+
+<%= link_to "トップページへ戻る", root_path %>
