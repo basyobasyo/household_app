@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   resources :payments do
     collection do
       post 'follow'
+      get  'calculate_page'
+      get  'calculate_result'
     end
   end
 end

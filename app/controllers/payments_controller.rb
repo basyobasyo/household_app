@@ -52,6 +52,26 @@ class PaymentsController < ApplicationController
     redirect_to root_path
   end
 
+  def calculate_page
+    if user_signed_in?
+      if current_user.pair_id
+        pair_user = User.find(current_user.pair_id)
+        @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).order("registration_date DESC")
+        #DBとのやりとりはモデルに書いたほうがいいのでは
+      else
+        redirect_to root_path
+        # ここにアラートを実装しておく
+      end
+    end
+    @calculate_date_from = params[:date_from]
+    @calculate_date_to   = params[:date_to]
+    # 受け取りのための変数を作成。ページ上に入力フォームを作成し、それを用いて精算を行えるようにする。
+  end
+
+  def calculate_result
+
+  end
+
   private
 
   def pair_check

@@ -39,5 +39,8 @@
     <% end %>
   <% end %>
 <%# // 支払い情報表示欄 %>
-
-
+<% if user_signed_in? %>
+  <% if @pair_check %>
+    <p><%= link_to "精算を行う", calculate_page_payments_path %></p>
+  <% end %>
+<% end %>
