@@ -29,12 +29,14 @@
 <%# //新規購入フォーム %>
 
 <%# 支払い情報表示欄 %>
-  <% @payments.each do |payment| %>
-    <p> 日にち <%= payment.registration_date %></p>
-    <p> 金額 <%= payment.price %></p>
-    <%= link_to "詳細", payment_path(payment.id) %>
-    <%# <%= link_to "編集する", edit_payment_path(payment.id) %>
-    <%# <%= link_to "削除する", payment_path(payment.id), method: :delete%>
+  <% if user_signed_in? %>
+    <% @payments.each do |payment| %>
+      <p> 日にち <%= payment.registration_date %></p>
+      <p> 金額 <%= payment.price %></p>
+      <%= link_to "詳細", payment_path(payment.id) %>
+      <%# <%= link_to "編集する", edit_payment_path(payment.id) %>
+      <%# <%= link_to "削除する", payment_path(payment.id), method: :delete%>
+    <% end %>
   <% end %>
 <%# // 支払い情報表示欄 %>
 

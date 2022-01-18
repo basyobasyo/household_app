@@ -3,7 +3,14 @@ class PaymentsController < ApplicationController
   before_action :set_params, only: [:show, :edit, :update, :destroy]
  
   def index
-    @payments = Payment.all
+    if user_signed_in?
+      if current_user.pair_id
+        pair_user = User.find(current_user.pair_id)
+        @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).order("registration_date DESC")
+      else
+        @payments = Payment.where(user_id: current_user.id)
+      end
+    end
   end
 
   def new
