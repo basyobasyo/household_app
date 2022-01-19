@@ -1,1 +1,39 @@
 <p>精算ページ</p>
+
+<div class='calculate-form'>
+  <%= form_with(url: calculate_result_payments_path, local: true) do |f|%>
+  <p>精算の期間を指定してください。</p>
+
+    <div class='input-calculate-date'>
+      <%= raw sprintf(
+                  f.date_select(
+                    :date_from,
+                    class:'select-date',
+                    id:"calculate-date",
+                    use_month_numbers: true,
+                    prompt:'-',
+                    start_year: 2022,
+                    end_year: (Time.now.year),
+                    date_separator: '/'),
+                  "年", "月") %>
+    </div>
+
+    <div class='input-calculate-date'>
+      <%= raw sprintf(
+                  f.date_select(
+                    :date_to,
+                    class:'select-date',
+                    id:"calculate-date",
+                    use_month_numbers: true,
+                    prompt:'-',
+                    start_year: 2022,
+                    end_year: (Time.now.year),
+                    date_separator: '/'),
+                  "年", "月") %>
+    </div>
+    <div>
+      <%= f.submit '精算を実行する', class:"calculate-btn" %><br/>
+      <%= link_to 'トップページに戻る', root_path, class:"back-btn" %>
+    </div>
+  <% end %>
+</div>
