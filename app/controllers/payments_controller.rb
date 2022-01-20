@@ -69,9 +69,8 @@ class PaymentsController < ApplicationController
   end
 
   def calculate_result
-    @calculate_date_from = params[:date_from]
-    @calculate_date_to   = params[:date_to]
-    binding.pry
+    date_from = date_complete(params["date_from(1i)"], params["date_from(2i)"], params["date_from(3i)"])
+    date_to   = date_complete(params["date_to(1i)"], params["date_to(2i)"], params["date_to(3i)"])
   end
 
   private
@@ -95,6 +94,8 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
   end
 
-
+  def date_complete(year,month,day)
+    return sprintf("%04d", year) + sprintf("%02d", month) + sprintf("%02d", day)
+  end
 end
 
