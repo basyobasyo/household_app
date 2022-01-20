@@ -1,8 +1,8 @@
 <p>精算ページ</p>
 
+<p>精算の期間を指定してください。</p>
 <div class='calculate-form'>
-  <%= form_with(url: calculate_result_payments_path, local: true) do |f|%>
-  <p>精算の期間を指定してください。</p>
+  <%= form_with url: calculate_result_payments_path, method: :post, local: true do |f|%>
 
     <div class='input-calculate-date'>
       <%= raw sprintf(

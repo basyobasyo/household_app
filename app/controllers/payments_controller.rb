@@ -95,5 +95,6 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
   end
 
+
 end
 
