@@ -12,5 +12,14 @@ class Payment < ApplicationRecord
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
+
+  def self.calculate(date_from, date_to, id)
+    payments = Payment.where(registration_date: date_from..date_to).where(user_id: id)
+    result = 0
+    payments.each do |payment|
+      result += payment[:price]
+    end
+    return result
+  end
   
 end
