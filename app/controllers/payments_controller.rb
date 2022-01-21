@@ -1,12 +1,12 @@
 class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
-  before_action :set_params, only: [:show, :edit, :update, :destroy]
- 
+  before_action :set_params, only: %i[show edit update destroy]
+
   def index
     if user_signed_in?
       if current_user.pair_id
         pair_user = User.find(current_user.pair_id)
-        @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).order("registration_date DESC")
+        @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).order('registration_date DESC')
       else
         @payments = Payment.where(user_id: current_user.id)
       end
@@ -19,18 +19,16 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
-      if @payment.save
-        redirect_to root_path
-      else
-        render :new
-      end
+    if @payment.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @payment.update(payment_params)
@@ -38,7 +36,7 @@ class PaymentsController < ApplicationController
     else
       render :edit
     end
-  end 
+  end
 
   def destroy
     @payment.destroy
@@ -69,8 +67,8 @@ class PaymentsController < ApplicationController
   end
 
   def calculate_result
-    date_from = date_complete(params["date_from(1i)"], params["date_from(2i)"], params["date_from(3i)"])
-    date_to   = date_complete(params["date_to(1i)"], params["date_to(2i)"], params["date_to(3i)"])
+    date_from = date_complete(params['date_from(1i)'], params['date_from(2i)'], params['date_from(3i)'])
+    date_to   = date_complete(params['date_to(1i)'], params['date_to(2i)'], params['date_to(3i)'])
     main_result = Payment.calculate(date_from, date_to, current_user.id)
     pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
     if main_result > pair_result
@@ -80,20 +78,19 @@ class PaymentsController < ApplicationController
       @pay_user     = User.find(current_user.id)
       @receive_user = User.find(current_user.pair_id)
     end
-    @result = ((main_result - pair_result).abs) / 2
-    binding.pry
+    @result = (main_result - pair_result).abs / 2
   end
 
   private
 
   def pair_check
     if user_signed_in?
-       @pair_check = User.exists?(pair_id: current_user.id)
-      if @pair_check
-       @pair_user = User.find(current_user.pair_id)
-      else
-       @pair_user = false
-      end
+      @pair_check = User.exists?(pair_id: current_user.id)
+      @pair_user = if @pair_check
+                     User.find(current_user.pair_id)
+                   else
+                     false
+                   end
     end
   end
 
@@ -105,8 +102,7 @@ class PaymentsController < ApplicationController
     @payment = Payment.find(params[:id])
   end
 
-  def date_complete(year,month,day)
-    return sprintf("%04d", year) + sprintf("%02d", month) + sprintf("%02d", day)
+  def date_complete(year, month, day)
+    format('%04d', year) + format('%02d', month) + format('%02d', day)
   end
 end
-

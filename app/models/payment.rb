@@ -1,11 +1,10 @@
 class Payment < ApplicationRecord
-
   with_options presence: true do
     validates :registration_date
     validates :user_id
   end
 
-  with_options presence: true, numericality: {only_integer: true} do
+  with_options presence: true, numericality: { only_integer: true } do
     validates :price
     validates :category_id
   end
@@ -19,7 +18,6 @@ class Payment < ApplicationRecord
     payments.each do |payment|
       result += payment[:price]
     end
-    return result
+    result
   end
-  
 end
