@@ -55,12 +55,21 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include "Password is invalid"
     end
     it 'pair_idはUserテーブル内に該当ユーザーが存在しないと登録できない' do
-      main_user = FactoryBot.create(:user)
+      @user.save
       pair_user = FactoryBot.create(:user)
-      main_user.pair_id = pair_user.id
+      @user.pair_id = pair_user.id
       pair_user.delete
-      main_user.valid?
-      expect(main_user.errors.full_messages).to include "Pair is invalid"
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Pair is invalid"
+    end
+    it 'pair_idが他ユーザーと同一のものは登録できない' do
+      @user.save
+      user1 = FactoryBot.create(:user)
+      user2 = FactoryBot.create(:user)
+      user1.update(pair_id: user2.id)
+      @user.pair_id = user2.id
+      @user.valid?
+      expect(@user.errors.full_messages).to include "Pair has already been taken"
     end
   end
   
