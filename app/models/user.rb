@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+
+  require "validator/pair_id_check_validator"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -15,7 +18,7 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]{6,}+\z/i }, on: :create  #createメソッドのみ適応。followメソッドの際にこのバリデーションがかかってしまうため、updateメソッドを使うことができない
   validates :nickname, presence: true
   validates :email   , uniqueness: true  
-  validates :pair_id , uniqueness: true, on: :update # 新規登録の際にバリデーションが動作しないようにupdateの際にのみ設定
+  validates :pair_id , uniqueness: true, pair_id_check: true, on: :update # 新規登録の際にバリデーションが動作しないようにupdateの際にのみ設定
   # // バリデーションの記述
   
 
