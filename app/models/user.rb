@@ -8,8 +8,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   # アソシエーションの記述
-  has_one :main_user, class_name: 'User',
-                      foreign_key: 'pair_id'
+  has_many :payments
+  has_one  :main_user, class_name: 'User',
+                       foreign_key: 'pair_id'
 
   belongs_to :pair, class_name: 'User', optional: true
   # // アソシエーションの記述
@@ -21,8 +22,6 @@ class User < ApplicationRecord
   validates :pair_id , uniqueness: true, pair_id_check: true, on: :update # 新規登録の際にバリデーションが動作しないようにupdateの際にのみ設定
   # // バリデーションの記述
   
-
-
   def self.follow(follow_id, another_id)
     user = User.find(follow_id)
     another_user = User.find(another_id)

@@ -1,5 +1,7 @@
 class Payment < ApplicationRecord
 
+  belongs_to :user
+
   # バリデーションの記述
   validates :registration_date, presence: true
   with_options presence: true, numericality: { only_integer: true } do
