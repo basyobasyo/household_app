@@ -7,4 +7,7 @@
   <p><%= @payment.memo%>
 </div>
 
+<%= link_to "編集", edit_payment_path, method: :get    %>
+<%= link_to "削除", payment_path     , method: :delete %>
+
 <%= link_to "トップページへ戻る", root_path %>

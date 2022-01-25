@@ -1,4 +1,7 @@
 <%= form_with(model: payment, local: true) do |f| %>
+
+  <%= render 'shared/error_messages', model: f.object %>
+
   <div>
     支払い金額<br/>
     <%= f.text_field :price, class:"paymente-text", id:"payment-info", placeholder:"支払い金額を入力してください" %>
