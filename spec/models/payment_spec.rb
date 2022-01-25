@@ -5,7 +5,17 @@ RSpec.describe Payment, type: :model do
     @payment = FactoryBot.build(:payment)
   end
 
-  describe 'ユーザー新規登録' do
+  describe '支払い情報の新規登録ができる場合' do
+    it "全ての支払い登録情報が存在する" do
+      expect(@payment).to be_valid
+    end
+    it 'memoは空でも登録ができる' do
+      @payment.memo = ""
+      expect(@payment).to be_valid
+    end
+  end
+  
+  describe '支払い情報の新規登録できない場合' do
     it 'priceが空では登録できない' do
       @payment.price = ''
       @payment.valid?
