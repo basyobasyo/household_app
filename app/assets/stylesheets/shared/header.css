@@ -1,0 +1,19 @@
+.top-header{
+  width: 100vw;
+  background-color: #FBD01D;
+  padding: 10px ;
+}
+
+.right-lists {
+  display: flex;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.right-lists li{
+  padding: 5px 60px 5px 0px;
+}
+
+.login{
+  /* background-color: ; */
+}
