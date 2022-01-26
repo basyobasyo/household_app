@@ -10,6 +10,8 @@ class PaymentsController < ApplicationController
       else
         @payments = Payment.where(user_id: current_user.id)
       end
+    else
+      render 'devise/sessions/new'
     end
   end
 
