@@ -4,6 +4,16 @@
   padding: 10px ;
 }
 
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-title{
+  padding-left: 30px;
+  font-size: 20px;
+}
+
 .right-lists {
   display: flex;
   list-style: none;

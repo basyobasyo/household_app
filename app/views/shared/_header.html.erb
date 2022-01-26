@@ -1,4 +1,6 @@
 <header class="top-header">
+<div class="nav">
+  <h2 class="top-title"> Share Wallet</h2>
   <ul class='right-lists'>
     <% if user_signed_in? %>
       <li><%= link_to current_user.nickname, "#", class: "user-nickname" %></li>
@@ -11,4 +13,5 @@
       <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
     <% end %>
   </ul>
+</div>
 </header>
