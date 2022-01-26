@@ -15,5 +15,11 @@
 }
 
 .login{
-  /* background-color: ; */
+  text-decoration: none;
+  color: #111;
+}
+
+.sign-up{
+  text-decoration: none;
+  color: #111;
 }
