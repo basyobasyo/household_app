@@ -1,0 +1,43 @@
+.top-sentence{
+  display: flex;
+  padding: 50px;
+  justify-content: space-around;
+}
+
+.top-sentence-right{  
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top-sentence-right-icon{
+  height: 200px;
+}
+
+
+.icon{
+  height: 220px;
+}
+
+.top-sentence-center{
+  display: flex;
+  margin-top: 150px;
+}
+
+.title-in-sentence{
+  font-family: 'Lora', serif;
+}
+
+.center-sentence{
+  font-size: 60px;
+  padding-top: 25px;
+}
+
+.sub-sentence{
+  text-align: center;
+}
+
+.bottom-icon{
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 60px;
+}

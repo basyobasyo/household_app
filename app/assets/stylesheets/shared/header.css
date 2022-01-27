@@ -1,0 +1,36 @@
+.top-header{
+  width: 100vw;
+  background-color: #FBD01D;
+  padding: 10px ;
+}
+
+.nav{
+  display: flex;
+  justify-content: space-between;
+}
+
+.top-title{
+  padding-left: 50px;
+  font-size: 25px;
+  font-family: 'Lora', serif;
+}
+
+.right-lists {
+  display: flex;
+  list-style: none;
+  justify-content: flex-end;
+}
+
+.right-lists li{
+  padding: 5px 60px 5px 0px;
+}
+
+.login{
+  text-decoration: none;
+  color: #111;
+}
+
+.sign-up{
+  text-decoration: none;
+  color: #111;
+}
