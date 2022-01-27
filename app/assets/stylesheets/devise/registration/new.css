@@ -1,0 +1,42 @@
+.registration-main{
+  text-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.registration-form-field::placeholder{
+  text-align: center;
+}
+
+.form-header-text{
+  font-size: 20px;
+  padding: 30px 0px;
+  border-bottom: 2px solid #EEE2C2;
+}
+
+.form-wrap{
+  width: 60%;
+  font-family: 'Noto Sans JP', sans-serif; 
+}
+
+.registration-form-field{
+  width: 80%;
+  padding: 12px 0px;
+  margin-top: 15px; 
+}
+
+.sign-up-btn{
+  width: 80%;
+  padding: 12px 0px;
+  margin-top: 15px; 
+  background-color: #F2B33D;
+  color: #fff;
+}
+
+.link{
+  padding-top: 30px;
+}
+
+.sign-in-link{
+  color: #111;
+}

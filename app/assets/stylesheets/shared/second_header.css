@@ -1,0 +1,13 @@
+.second-header-logo{
+  font-family: 'Lora', serif;
+  color: #111;
+  background-color: #FBD01D;
+  width: 100%;
+  height: 100px;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+
+}
