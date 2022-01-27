@@ -1,25 +1,18 @@
+<%= render "shared/second_header" %>
 
+<%= form_with model: @user, url: user_session_path, class: 'session-main', local: true do |f| %>
+  <div class="form-wrap">
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class:"session-form-field" %>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"session-form-field" %>
+    <div class="actions">
+      <%= f.submit "ログインする", class:"log-in-btn"%>
+    </div>
 
-<div class="top-logo">ようこそ！ 割り勘家計簿へ！</div>
-
-<%= form_with model: @user, url: user_session_path, class: 'registration-main', local: true do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <div class="link">
+      <p>アカウントをお持ちではないですか？<p>
+      <%= link_to "お持ちでない方はこちらへ", new_user_registration_path, method: :get, class:"sign-up-link" %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "ログインする" %>
-  </div>
 
 <% end %>
-
-<div>
-  <p>アカウントをお持ちではないですか？<p>
-  <%= link_to "お持ちでない方はこちらへ", new_user_registration_path, method: :get %>
-</div>

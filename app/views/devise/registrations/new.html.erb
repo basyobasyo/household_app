@@ -6,10 +6,10 @@
 
   <%= render "devise/shared/error_messages", resource: resource %>
 
-    <%= f.text_field :nickname, placeholder: "ニックネーム",  autofocus: true, class:"form-field" %>
-    <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class:"form-field" %>
-    <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード",  class:"form-field" %>
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度パスワードを入力してください", class:"form-field" %>
+    <%= f.text_field :nickname, placeholder: "ニックネーム",  autofocus: true, class:"registration-form-field" %>
+    <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class:"registration-form-field" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード",  class:"registration-form-field" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度パスワードを入力してください", class:"registration-form-field" %>
 
   <div>
     <%= f.submit "Sign up", class:"sign-up-btn" %>

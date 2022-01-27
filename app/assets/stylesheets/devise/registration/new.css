@@ -4,7 +4,7 @@
   justify-content: center;
 }
 
-.form-field::placeholder{
+.registration-form-field::placeholder{
   text-align: center;
 }
 
@@ -19,7 +19,7 @@
   font-family: 'Noto Sans JP', sans-serif; 
 }
 
-.form-field{
+.registration-form-field{
   width: 80%;
   padding: 12px 0px;
   margin-top: 15px; 
@@ -29,7 +29,7 @@
   width: 80%;
   padding: 12px 0px;
   margin-top: 15px; 
-  background-color: #F2B16A;
+  background-color: #F2B33D;
   color: #fff;
 }
 
