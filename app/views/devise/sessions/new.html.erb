@@ -2,6 +2,12 @@
 
 <%= form_with model: @user, url: user_session_path, class: 'session-main', local: true do |f| %>
   <div class="form-wrap">
+
+  <div class='login-flash-message'>
+    <%= flash[:notice] %>
+    <%= flash[:alert] %>
+  </div>
+
       <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "Email", class:"session-form-field" %>
       <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class:"session-form-field" %>
     <div class="actions">
