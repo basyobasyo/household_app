@@ -1,37 +1,22 @@
 <%= render "shared/second_header" %>
 
 <%= form_with model: @user, url: user_registration_path, class: 'registration-main', local: true do |f| %>
-
+<div class="form-wrap">
   <h2 class="form-header-text">新規登録</h2>
 
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :nickname %><br/>
-    <%= f.text_field :nickname,  autofocus: true %>
-  </div>
+    <%= f.text_field :nickname, placeholder: "ニックネーム",  autofocus: true, class:"form-field" %>
+    <%= f.email_field :email, autocomplete: "email", placeholder: "Email", class:"form-field" %>
+    <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード",  class:"form-field" %>
+    <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "確認のためもう一度パスワードを入力してください", class:"form-field" %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
+  <div>
+    <%= f.submit "Sign up", class:"sign-up-btn" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="link">
+    <%= link_to "アカウントをお持ちの方はこちらへ", new_user_session_path, class:"sign-in-link"%>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-  <%= render "devise/shared/links" %>
+</div>
 <% end %>
 
