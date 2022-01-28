@@ -1,28 +1,29 @@
 <%= render "shared/header" %>
-
-<div class="top-sentence">
-      <div class="top-sentence-left">
-        <%= image_tag "y1162-1.png", class:"icon" %>
+<% unless user_signed_in? %>
+  <div class="top-sentence">
+        <div class="top-sentence-left">
+          <%= image_tag "y1162-1.png", class:"icon" %>
+        </div>
+        <div class="top-sentence-center">
+            <%= image_tag "y0849.png", class:"icon"%>
+            <div class="center-sentence">
+              <p>ようこそ、</p>
+              <p><span class="title-in-sentence">Share Wallet</span>へ。</p>
+            </div>
+        </div>
+        <div class="top-sentence-right">
+          <%= image_tag "y1150.png", class:"top-sentence-right-icon" %>
       </div>
-      <div class="top-sentence-center">
-          <%= image_tag "y0849.png", class:"icon"%>
-          <div class="center-sentence">
-            <p>ようこそ、</p>
-            <p><span class="title-in-sentence">Share Wallet</span>へ。</p>
-          </div>
-      </div>
-      <div class="top-sentence-right">
-        <%= image_tag "y1150.png", class:"top-sentence-right-icon" %>
-    </div>
-</div>
-<div class="sub-sentence">
-  <h2>Share Walletは家計と個人のお財布を分けるための家計簿アプリです。</h2>
-  <h2>便利な家計簿アプリを体験してみませんか？</h2>
-</div>
-<div class="bottom-icon">
-  <%= image_tag "y1161-2.png", class:"icon" %>
-  <%= image_tag "y1155.png", class:"icon" %>
-</div>
+  </div>
+  <div class="sub-sentence">
+    <h2>Share Walletは家計と個人のお財布を分けるための家計簿アプリです。</h2>
+    <h2>便利な家計簿アプリを体験してみませんか？</h2>
+  </div>
+  <div class="bottom-icon">
+    <%= image_tag "y1161-2.png", class:"icon" %>
+    <%= image_tag "y1155.png", class:"icon" %>
+  </div>
+<% end %>
 
 <%# ペア登録機能 %>
   <% if user_signed_in? %>

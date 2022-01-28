@@ -10,7 +10,7 @@
 }
 
 .top-title{
-  padding-left: 0px;
+  padding-left: 50px;
   font-size: 25px;
   font-family: 'Lora', serif;
 }
@@ -19,10 +19,26 @@
   display: flex;
   list-style: none;
   justify-content: flex-end;
+  font-family: 'Noto Sans JP', sans-serif; 
 }
 
 .right-lists li{
   padding: 5px 60px 5px 0px;
+}
+
+.user-nickname{
+  text-decoration: none;
+  color: #111;
+}
+
+.logout{
+  text-decoration: none;
+  color: #111;
+}
+
+.pair-nickname{
+  text-decoration: none;
+  color: #111;
 }
 
 .login{

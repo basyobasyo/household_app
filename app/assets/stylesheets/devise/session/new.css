@@ -10,6 +10,11 @@
   margin-top: 50px; 
 }
 
+.login-flash-message{
+  color: red;
+  padding-top: 30px;
+}
+
 .session-form-field::placeholder{
   text-align: center;
 }

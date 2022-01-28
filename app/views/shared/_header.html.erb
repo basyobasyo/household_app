@@ -3,10 +3,10 @@
   <h2 class="top-title"> Share Wallet</h2>
   <ul class='right-lists'>
     <% if user_signed_in? %>
-      <li><%= link_to current_user.nickname, "#", class: "user-nickname" %></li>
+      <li><%= link_to current_user.nickname, "#", class: "user-nickname" %> の家計簿 </li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
       <% if current_user.pair_id %>
-        <li> 共有先 <%= link_to @pair_user.nickname, "#", class: "pair_nickname" %></li>
+        <li> ペア登録 : <%= link_to @pair_user.nickname, "#", class: "pair-nickname" %></li>
       <% end %>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>
