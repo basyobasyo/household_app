@@ -1,4 +1,6 @@
 <%= render "shared/header" %>
+
+<%# 未ログイン時のトップページ %>
 <% unless user_signed_in? %>
   <div class="top-sentence">
         <div class="top-sentence-left">
@@ -24,6 +26,7 @@
     <%= image_tag "y1155.png", class:"icon" %>
   </div>
 <% end %>
+<%# //未ログイン時のトップページ %>
 
 <%# ペア登録機能 %>
   <% if user_signed_in? %>
@@ -50,6 +53,19 @@
     <%= link_to "新規入力画面に進む", new_payment_path %>
   <% end %>
 <%# //新規購入フォーム %>
+
+<%# １ヶ月間の合計支払い表示機能 %>
+<% if user_signed_in? %>
+  <% if @pair_check %>
+    <div>
+      <p><%= current_user.nickname %>さんの直近１ヶ月の支払いは <%= @main_result %>円です </p>
+      <p><%= current_user.pair.nickname %>さんの直近１ヶ月の支払いは <%= @pair_result %>円です </p>
+      <p>二人の１ヶ月間の支払い合計額は <%= @main_result + @pair_result %>円です </p>
+    </div>
+   <% end %>
+<% end %>
+
+<%# //１ヶ月間の合計支払い表示機能 %>
 
 <%# 支払い情報表示欄 %>
   <% if user_signed_in? %>

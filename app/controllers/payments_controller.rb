@@ -6,9 +6,13 @@ class PaymentsController < ApplicationController
     if user_signed_in?
       if current_user.pair_id
         pair_user = User.find(current_user.pair_id)
-        @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).order('registration_date DESC')
+        @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).where(registration_date: (30.days.ago)..(Time.now)).order('registration_date DESC')
+        main_payments = @payments.where(user_id: current_user.id)
+        pair_payments = @payments.where(user_id: pair_user.id)
+        @main_result = result(main_payments)
+        @pair_result = result(pair_payments)
       else
-        @payments = Payment.where(user_id: current_user.id)
+        @payments = Payment.where(user_id: current_user.id).where(registration_date: (30.days.ago)..(Time.now)).order('registration_date DESC')
       end
     end
   end
@@ -51,19 +55,6 @@ class PaymentsController < ApplicationController
   end
 
   def calculate_page
-    # if user_signed_in?
-    #   if current_user.pair_id
-    #     pair_user = User.find(current_user.pair_id)
-    #     @payments = Payment.where(user_id: current_user.id).or(Payment.where(user_id: pair_user.id)).order("registration_date DESC")
-    #     #DBとのやりとりはモデルに書いたほうがいいのでは
-    #   else
-    #     redirect_to root_path
-    #     # ここにアラートを実装しておく
-    #   end
-    # end
-    # @calculate_date_from = params[:date_from]
-    # @calculate_date_to   = params[:date_to]
-    # 受け取りのための変数を作成。ページ上に入力フォームを作成し、それを用いて精算を行えるようにする。
   end
 
   def calculate_result
@@ -104,5 +95,13 @@ class PaymentsController < ApplicationController
 
   def date_complete(year, month, day)
     format('%04d', year) + format('%02d', month) + format('%02d', day)
+  end
+
+  def result(data)
+    result = 0
+    data.each do |payment|
+      result += payment[:price]
+    end
+    return result
   end
 end
