@@ -46,24 +46,9 @@
         <% end %>
       <% end %>
     </div>
-
     <%# //１ヶ月間の合計支払い表示機能 %>
 
-    <%# 支払い情報表示欄 %>
-      <% if user_signed_in? %>
-        <% @payments.each do |payment| %>
-          <p> 日にち <%= payment.registration_date %></p>
-          <p> 金額 <%= payment.price %></p>
-          <%= link_to "詳細", payment_path(payment.id) %>
-          <%# <%= link_to "編集する", edit_payment_path(payment.id) %>
-          <%# <%= link_to "削除する", payment_path(payment.id), method: :delete%>
-        <% end %>
-      <% end %>
-    <%# // 支払い情報表示欄 %>
-  </div>
-
-  <div class="page-right">
-    <%# ペア登録機能 %>
+        <%# ペア登録機能 %>
       <% if user_signed_in? %>
         <% unless @pair_check %>
           <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
@@ -95,5 +80,29 @@
         <% end %>
       <% end %>
     <%# //精算ページのリンク %>
+
+  </div>
+
+  <div class="page-right">
+
+      <%# 支払い情報表示欄 %>
+    <div class="payment-info">
+      <% if user_signed_in? %>
+      <p class="page-right-title">明細一覧</p>
+        <% @payments.each do |payment| %>
+          <div class="contents">
+            <div class="left-content">
+              <p><%= payment.registration_date %></p>
+              <p> 金額 ￥<%= payment.price %>円 </p>
+            </div>
+            <div class="right-content">
+                <%= link_to image_tag("Orion_edit.png", class:"right-content-icon" ), payment_path(payment.id) %> 
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+    <%# // 支払い情報表示欄 %>
+
   </div>
 </div>

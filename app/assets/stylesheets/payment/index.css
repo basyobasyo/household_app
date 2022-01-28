@@ -67,9 +67,49 @@
 .result-icon{
   height: 25vh;
   padding-right: 40px;
-  
 }
 
 .page-right{
+  display: flex;
+  justify-content: center;
   width: 50vw;
+}
+
+.payment-info{
+  width: 45vw;
+}
+
+.contents{
+  display: flex;
+  justify-content: space-around;
+  /* text-align: center; */
+  border: 2px groove #F7CA79;
+  margin-top: 10px;
+}
+
+.left-content{
+  width: 20vw;
+  padding-left: 30px;
+}
+
+.right-content{
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-right-title{
+  text-align: center;
+  padding-top: 20px;
+}
+
+.right-content-icon{
+  margin-top: 1vh;
+  padding-right: 3vh;
+  height: 25px;
+}
+
+.right-content-text{
+  color: #111;
 }
