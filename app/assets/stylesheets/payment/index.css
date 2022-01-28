@@ -41,3 +41,35 @@
   justify-content: space-between;
   padding: 0px 60px;
 }
+
+.main-page{
+  display: flex;
+  font-family: 'Noto Sans JP', sans-serif; 
+  background-color: #F7F6EB;
+  height: 100vh;
+}
+
+.page-left{
+  width: 50vw;
+}
+
+.result-part{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  background-color: #fff;
+  padding: 5px, 20px;
+  margin: 20px;
+  border-radius: 30px;
+}
+
+.result-icon{
+  height: 25vh;
+  padding-right: 40px;
+  
+}
+
+.page-right{
+  width: 50vw;
+}
