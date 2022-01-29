@@ -51,6 +51,9 @@
 
 .page-left{
   width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .result-part{
@@ -62,11 +65,17 @@
   padding: 5px, 20px;
   margin: 20px;
   border-radius: 30px;
+  width: 45vw;
 }
 
 .result-icon{
   height: 25vh;
   padding-right: 40px;
+}
+
+.page-left-bottom{
+  display: flex;
+
 }
 
 .page-right{
@@ -92,6 +101,18 @@
   padding-left: 30px;
 }
 
+.input-link{
+  text-align: center;
+}
+
+.link-icon{
+  height: 25vh;
+}
+
+.calculate-link{
+  text-align: center;
+}
+
 .right-content{
   width: 20vw;
   display: flex;
@@ -113,3 +134,4 @@
 .right-content-text{
   color: #111;
 }
+
