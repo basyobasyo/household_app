@@ -131,11 +131,12 @@
 }
 
 .follow-form{
+  height: 25vh;
+  padding-top:20px;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  /* align-items: center;
-  justify-content: space-around; */
+  align-items: center;
+  justify-content: space-around;
 }
 
 .follow-pull-down{
