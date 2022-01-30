@@ -41,3 +41,140 @@
   justify-content: space-between;
   padding: 0px 60px;
 }
+
+.main-page{
+  display: flex;
+  font-family: 'Noto Sans JP', sans-serif; 
+  background-color: #F7F6EB;
+  height: 100vh;
+}
+
+.page-left{
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.result-part{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  background-color: #fff;
+  padding: 5px, 20px;
+  margin: 20px;
+  border-radius: 30px;
+  width: 45vw;
+}
+
+.result-icon{
+  height: 25vh;
+  padding-right: 40px;
+}
+
+
+.page-right{
+  display: flex;
+  justify-content: center;
+  width: 50vw;
+}
+
+.payment-info{
+  width: 45vw;
+}
+
+.contents{
+  display: flex;
+  justify-content: space-around;
+  border: 2px groove #F7CA79;
+  margin-top: 10px;
+}
+
+.left-content{
+  width: 20vw;
+  padding-left: 30px;
+}
+
+.page-left-bottom{
+  display: flex;
+  justify-content: space-between;
+  width: 45vw;
+}
+
+.input-link{
+  text-align: center;
+  background-color: #fff;
+  border-radius: 30px;
+  width:21vw;
+  padding-top: 20px;
+}
+
+
+.link-icon{
+  height: 25vh;
+}
+
+.calculate-and-find-link{
+  width:21vw;
+  border-radius: 30px;
+  background-color: #fff;
+}
+
+.calculate-link{
+    text-align: center;
+    padding-top: 20px;
+}
+
+.link-text{
+  color: #111;
+}
+
+.follow-form{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  /* align-items: center;
+  justify-content: space-around; */
+}
+
+.follow-pull-down{
+  /* padding-top: 10px;
+  padding-bottom: 15px; */
+}
+
+.select-form{
+  width: 18vw;
+  height: 40px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.follow-btn{
+  width: 18vw;
+  height: 40px;
+  text-align: center;
+}
+
+.right-content{
+  width: 20vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-right-title{
+  text-align: center;
+  padding-top: 20px;
+}
+
+.right-content-icon{
+  margin-top: 1vh;
+  padding-right: 3vh;
+  height: 25px;
+}
+
+.right-content-text{
+  color: #111;
+}
+

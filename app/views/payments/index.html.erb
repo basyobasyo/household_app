@@ -15,7 +15,7 @@
         </div>
         <div class="top-sentence-right">
           <%= image_tag "y1150.png", class:"top-sentence-right-icon" %>
-      </div>
+       </div>
   </div>
   <div class="sub-sentence">
     <h2>Share Walletは家計と個人のお財布を分けるための家計簿アプリです。</h2>
@@ -25,61 +25,96 @@
     <%= image_tag "y1161-2.png", class:"icon" %>
     <%= image_tag "y1155.png", class:"icon" %>
   </div>
-<% end %>
 <%# //未ログイン時のトップページ %>
+<% else %>
+<div class="main-page">
+  <div class="page-left">
 
-<%# ペア登録機能 %>
-  <% if user_signed_in? %>
-    <% unless @pair_check %>
-      <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
-        <select name="follow_id">
-          <option>一緒に使う相手を選んでください</option>
-          <% User.where.not(id: current_user.id).where(pair_id: nil).each do |user| %>
-          <option value=<%= user.id %>><%= user.nickname %></option>
-          <% end %>
-        </select>
-        <input name="another_id" type="hidden" value=<%= current_user.id %>>
-
-        <div class="follow-btn-contents">
-          <%= f.submit "登録する" ,class:"follow-btn" %>
-        </div>
-      <% end %>
-    <% end %>
-  <% end %>
-<%# // ペア登録機能 %>
-
-<%# 新規購入フォーム %> 
-  <% if user_signed_in? %>
-    <%= link_to "新規入力画面に進む", new_payment_path %>
-  <% end %>
-<%# //新規購入フォーム %>
-
-<%# １ヶ月間の合計支払い表示機能 %>
-<% if user_signed_in? %>
-  <% if @pair_check %>
-    <div>
-      <p><%= current_user.nickname %>さんの直近１ヶ月の支払いは <%= @main_result %>円です </p>
-      <p><%= current_user.pair.nickname %>さんの直近１ヶ月の支払いは <%= @pair_result %>円です </p>
-      <p>二人の１ヶ月間の支払い合計額は <%= @main_result + @pair_result %>円です </p>
+    <%# １ヶ月間の合計支払い表示機能 %>
+    <div class="result-part">
+        <% if @pair_check %>
+          <div>
+            <%= image_tag "y0009.png", class:"result-icon" %>
+          </div>
+          <div>
+            <p>それぞれの直近１ヶ月の合計は・・・</p>
+            <p><%= current_user.nickname %>さん： <%= @main_result %>円です </p>
+            <p><%= current_user.pair.nickname %>さん： <%= @pair_result %>円です </p>
+            <p>二人の１ヶ月間の支払い合計額は <%= @main_result + @pair_result %>円です </p>
+          </div>
+        <% end %>
     </div>
-   <% end %>
-<% end %>
+    <%# //１ヶ月間の合計支払い表示機能 %>
 
-<%# //１ヶ月間の合計支払い表示機能 %>
+    <div class="page-left-bottom">
+      <%# 新規購入フォームのリンク %> 
+      <div class="input-link">
+          <div>
+            <%= link_to "新規入力画面へ",  new_payment_path, class:"link-text" %>
+          </div>
+          <div>
+            <%= link_to image_tag("y0455.png", class:"link-icon"), new_payment_path %>
+          </div>
+      </div>
+      <%# //新規購入フォームのリンク %>
 
-<%# 支払い情報表示欄 %>
-  <% if user_signed_in? %>
-    <% @payments.each do |payment| %>
-      <p> 日にち <%= payment.registration_date %></p>
-      <p> 金額 <%= payment.price %></p>
-      <%= link_to "詳細", payment_path(payment.id) %>
-      <%# <%= link_to "編集する", edit_payment_path(payment.id) %>
-      <%# <%= link_to "削除する", payment_path(payment.id), method: :delete%>
-    <% end %>
-  <% end %>
-<%# // 支払い情報表示欄 %>
-<% if user_signed_in? %>
-  <% if @pair_check %>
-    <p><%= link_to "精算を行う", calculate_page_payments_path %></p>
-  <% end %>
+        <%# 精算ページのリンク %>
+      <div class="calculate-and-find-link">
+        <% if @pair_check %>
+          <div class="calculate-link">
+            <div>
+              <%= link_to "精算ページへ",  new_payment_path, class:"link-text" %>
+            </div>
+            <div>
+              <p><%= link_to image_tag("y0849.png", class:"link-icon"), calculate_page_payments_path %></p>
+            </div>
+          </div>
+          <%# //精算ページのリンク %>
+
+          <%# ペア登録機能 %>
+        <% else %>
+          <div class="follow-form">
+            <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
+              <%# <div class="follow-pull-down"> %>
+                <select name="follow_id" class="select-form">
+                  <option>共有先を登録しましょう</option>
+                    <% User.where.not(id: current_user.id).where(pair_id: nil).each do |user| %>
+                  <option value=<%= user.id %>><%= user.nickname %>さん</option>
+                    <% end %>
+                </select>
+                <input name="another_id" type="hidden" value=<%= current_user.id %>>
+              <%# </div> %>
+              <%# <div class="follow-btn"> %>
+                <%= f.submit "登録する" ,class:"follow-btn" %>
+              <%# </div> %>
+            <% end %>
+          </div>
+        <% end %>
+          <%# // ペア登録機能 %>
+      </div>
+    </div> 
+
+  </div>
+
+  <div class="page-right">
+
+      <%# 支払い情報表示欄 %>
+    <div class="payment-info">
+      <p class="page-right-title">明細一覧</p>
+        <% @payments.each do |payment| %>
+          <div class="contents">
+            <div class="left-content">
+              <p><%= payment.registration_date %></p>
+              <p> 金額 ￥<%= payment.price %>円 </p>
+            </div>
+            <div class="right-content">
+                <%= link_to image_tag("Orion_edit.png", class:"right-content-icon" ), payment_path(payment.id) %> 
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <%# // 支払い情報表示欄 %>
+
+  </div>
+</div>
 <% end %>
