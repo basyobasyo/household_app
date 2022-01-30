@@ -1,0 +1,48 @@
+.payment-form{
+  width: 55vw;
+  height: 45px;
+}
+
+.payment-form::placeholder{
+  text-align: center;
+  padding-top: 20px;
+}
+
+.form-part{
+  margin-top: 30px;
+}
+
+.select-date{
+  width: 15vw;
+}
+
+.date-form{
+  display: flex;
+  justify-content: center;
+}
+
+.date-form p{
+  padding-top: 1.5vh;
+}
+
+.date-form select{
+  width: 100px;
+  height: 45px;
+}
+
+.memo-form{
+  height: 70px;
+}
+
+.payment-btn{
+  background-color: #F2B33D;
+  color: #fff;
+}
+
+.back-btn-form{
+  text-align: center;
+}
+
+.back-btn{
+  color: #111;
+}

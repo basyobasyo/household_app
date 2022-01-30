@@ -1,3 +1,11 @@
-<p>新規投稿ページです</p>
+<%= render "shared/header" %>
 
-<%= render partial: "form", locals: { payment: @payment }%>
+<div class="new-main-page">
+  <div class="new-content">
+    <div class="new-title">
+      <p>新規投稿ページ</p>
+    </div>
+
+    <%= render partial: "form", locals: { payment: @payment }%>
+  </div>
+</div>
