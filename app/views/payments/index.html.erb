@@ -73,9 +73,8 @@
 
           <%# ペア登録機能 %>
         <% else %>
-          <div class="follow-form">
-            <%= form_with(url: follow_payments_path, local: true, method: :post) do |f| %>
-              <%# <div class="follow-pull-down"> %>
+            <%= form_with(url: follow_payments_path, local: true, method: :post, class:"follow-form") do |f| %>
+              <div class="follow-pull-down">
                 <select name="follow_id" class="select-form">
                   <option>共有先を登録しましょう</option>
                     <% User.where.not(id: current_user.id).where(pair_id: nil).each do |user| %>
@@ -83,12 +82,11 @@
                     <% end %>
                 </select>
                 <input name="another_id" type="hidden" value=<%= current_user.id %>>
-              <%# </div> %>
-              <%# <div class="follow-btn"> %>
+              </div>
+              <div class="follow-btn">
                 <%= f.submit "登録する" ,class:"follow-btn" %>
-              <%# </div> %>
+              </div>
             <% end %>
-          </div>
         <% end %>
           <%# // ペア登録機能 %>
       </div>
