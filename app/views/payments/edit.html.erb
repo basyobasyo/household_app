@@ -1,3 +1,11 @@
-<p>編集ページです</p>
+<%= render "shared/header" %>
 
-<%= render partial: "form", locals: { payment: @payment} %>
+<div class="edit-main-page">
+  <div class="edit-content">
+    <div class="edit-title">
+      <p>編集ページ</p>
+    </div>
+
+    <%= render partial: "form", locals: { payment: @payment }%>
+  </div>
+</div>
