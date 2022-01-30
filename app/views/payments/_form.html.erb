@@ -1,12 +1,12 @@
-<%= form_with(model: payment, local: true) do |f| %>
+<%= form_with(model: payment, local: true, class:"input-form") do |f| %>
 
   <%= render 'shared/error_messages', model: f.object %>
 
-  <div>
+  <div class="form-part">
     支払い金額<br/>
-    <%= f.text_field :price, class:"paymente-text", id:"payment-info", placeholder:"支払い金額を入力してください" %>
+    <%= f.text_field :price, class:"price-form payment-form", id:"payment-info", placeholder:"支払い金額を入力してください" %>
   </div>
-    <div class='input-payment-date'>
+    <div class='date-form form-part'>
       <%= raw sprintf(
                   f.date_select(
                     :registration_date,
@@ -16,19 +16,21 @@
                     prompt:'-',
                     start_year: 2022,
                     end_year: (Time.now.year),
-                    date_separator: '/'),
-                  "年", "月") %>
+                    date_separator: '%s'),
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
     </div>
-    <div>
+    <div class="form-part">
       カテゴリーの選択<br/>
-      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"payment-category"}) %>
+      <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box payment-form", id:"payment-category"}) %>
     </div>
-    <div>
+    <div class="form-part">
       備考欄<br/>
-      <%= f.text_area :memo, class:"peyment-memo", id:"payment-info", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
+      <%= f.text_area :memo, class:"memo-form payment-form", id:"payment-info", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
     </div>
-    <div>
-      <%= f.submit "入力を保存する", class:"payment-btn" %><br/>
-      <%= link_to "トップページへ戻る", root_path, class:"back-btn" %>
+    <div class="form-part">
+      <%= f.submit "入力を保存する", class:"payment-btn payment-form" %>
+    </div>
+    <div class="form-part back-btn-form">
+      <%= link_to "トップページへ戻る", root_path, class:"back-btn payment-form" %>
     </div>
 <% end %>
