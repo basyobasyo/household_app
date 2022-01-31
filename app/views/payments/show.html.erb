@@ -1,13 +1,35 @@
-<p>詳細ページです<p>
+<%= render "shared/header" %>
+<div class="show-page">
+  <div class="show-content">
+    <div class="show-title">
+      <p>詳細ページ<p>
+    </div>
 
-<div>
-  <p><%= @payment.registration_date %>に購入したもの</p>
-  <p><%= @payment.category.name%></p>
-  <p><%= @payment.price%>
-  <p><%= @payment.memo%>
+    <div class="payment-show">
+      <div>
+        <p class="show-text">日付</p>
+        <p class="show-text">カテゴリー</p>
+        <p class="show-text">金額</p>
+        <p class="show-text">備考</p>
+      </div>
+      <div>
+        <p class="show-text">:</p>
+        <p class="show-text">:</p>
+        <p class="show-text">:</p>
+        <p class="show-text">:</p>
+      </div>
+      <div>
+        <p class="show-text"><%= @payment.registration_date %></p>
+        <p class="show-text"><%= @payment.category.name%></p>
+        <p class="show-text"><%= @payment.price%></p>
+        <p class="show-text"><%= @payment.memo%></p>
+      </div>
+    </div>
+    <div class="show-links">
+      <%= link_to "編集", edit_payment_path, method: :get    ,class:"show-link"%>
+      <%= link_to "削除", payment_path     , method: :delete ,class:"show-link"%>
+    </div>
+
+    <%= link_to "トップページへ戻る", root_path, class:"show-back-btn"%>
+  </div>
 </div>
-
-<%= link_to "編集", edit_payment_path, method: :get    %>
-<%= link_to "削除", payment_path     , method: :delete %>
-
-<%= link_to "トップページへ戻る", root_path %>

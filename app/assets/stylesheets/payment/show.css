@@ -1,0 +1,54 @@
+.show-page{
+  display: flex;
+  justify-content: center;
+  font-family: 'Noto Sans JP', sans-serif; 
+}
+
+.show-content{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.show-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 15vh;
+  width: 60vw;
+  border-bottom: 2px solid #EEE2C2;
+  font-size: 20px;
+}
+
+.payment-show{
+  width: 20vw;
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+  padding-top: 30px;
+}
+
+.show-text{
+  padding-top: 20px;
+}
+
+.show-links{
+  width: 20vw;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 40px;
+}
+
+.show-link{
+  text-align: center;
+  background-color: #F2B33D;
+  color: #fff;
+  width: 120px;
+  height: 30px;
+  border: 2px outset	#BCA352;
+}
+
+.show-back-btn{
+  color: #111;
+  padding-top: 30px;
+}
