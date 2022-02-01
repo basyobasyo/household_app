@@ -28,7 +28,7 @@ Basic認証 PW : 1111
 
 # 目指した課題解決
 
-結婚、同棲をしている方々の家計管理の課題を解決するためにこのアプリケーションを作成した。家計を共有しているが、どちらがどれだけ払ったのかという管理をするのは毎月発生する手間だと考えた。その問題を解決するために、アプリケーションを用いてどちらがどれだけ払っているのか、また、その立替分をどれだけ支払う必要があるのかを簡単に算出することを実現した。
+結婚、同棲をしている方々の家計管理の課題を解決するためにこのアプリケーションを作成した。家計を共有しているが、どちらがどれだけ払ったのかという管理をするのは毎月発生する手間だと考えた。その問題を解決するために、アプリケーションを用いてどちらがどれだけ払っているのか、また、その立替分をどれだけ支払う必要があるのかを簡単に算出することができるようにした。
 
 # 洗い出した要件
 
@@ -50,24 +50,31 @@ Basic認証 PW : 1111
 
 # 実装した機能についての画像やGIFおよびその説明
 ①ユーザー管理機能  
-新規登録:https://gyazo.com/b0747d0fc110845f1927524efd169fce  
+＊新規登録
+![Image from Gyazo](https://i.gyazo.com/b0747d0fc110845f1927524efd169fce.gif)
 ・新規登録時はニックネーム、メールアドレス、パスワード、確認用パスワードを入力し、「sign up」を押下する。  
  
-ログイン:https://gyazo.com/c3eafa25c071be7c9840a25934e9ed10  
+＊ログイン  
+[![Image from Gyazo](https://i.gyazo.com/c3eafa25c071be7c9840a25934e9ed10.gif)](https://gyazo.com/c3eafa25c071be7c9840a25934e9ed10)
 ・ログイン時はメールアドレス、パスワードを入力し、「ログインする」を押下する。  
  
 ②支払い情報保存機能  
-支払い情報の入力:https://gyazo.com/0fb8059e1587370364b026097bbaa6ef  
+
+＊支払い情報の入力
+[![Image from Gyazo](https://i.gyazo.com/0fb8059e1587370364b026097bbaa6ef.gif)](https://gyazo.com/0fb8059e1587370364b026097bbaa6ef)  
 ・新規入力は金額、日付、カテゴリー、備考欄を入力し、「入力を保存する」を押下する。入力の保存の際、備考欄は必須ではない。  
  
-支払い情報の編集:https://gyazo.com/0fb8059e1587370364b026097bbaa6ef  
+＊支払い情報の編集
+[![Image from Gyazo](https://i.gyazo.com/f999bfaf39c5bda29a7ebd97054fb4e9.gif)](https://gyazo.com/f999bfaf39c5bda29a7ebd97054fb4e9)  
 ・編集は元のデータを入力された状態でフォーム画面へ遷移する。新規入力時と同様に金額、日付、カテゴリー、備考欄を入力し、「入力を保存する」を押下する。  
  
-支払い情報の削除:https://gyazo.com/f999bfaf39c5bda29a7ebd97054fb4e9  
+＊支払い情報の削除
+[![Image from Gyazo](https://i.gyazo.com/5ffc2d290e675fa6ce5184a75a9c4ce3.gif)](https://gyazo.com/5ffc2d290e675fa6ce5184a75a9c4ce3)  
 ・削除は詳細ページより「削除」を押下する。  
  
 ③精算機能  
-精算結果の出力:https://gyazo.com/5ffc2d290e675fa6ce5184a75a9c4ce3  
+＊精算結果の出力  
+[![Image from Gyazo](https://i.gyazo.com/5b79fb249e117ac75f3ff3be523e3d6e.gif)](https://gyazo.com/5b79fb249e117ac75f3ff3be523e3d6e)
 ・精算はトップページの「精算ページへ」を押下し、ページ遷移後、精算する期間をフォームに入力する。「精算を実行する」を押下すると、精算結果が出力される。  
  
 # 実装予定の機能
@@ -112,11 +119,11 @@ Basic認証 PW : 1111
 
  ## ER図
 
- https://gyazo.com/6d2f8bbe6cff0bfa84a74f1cd1da18fc
+[![Image from Gyazo](https://i.gyazo.com/6d2f8bbe6cff0bfa84a74f1cd1da18fc.png)](https://gyazo.com/6d2f8bbe6cff0bfa84a74f1cd1da18fc)
 
  ## 画面遷移図
 
- https://gyazo.com/65ce25ac5676f33834cea55c7648b838
+[![Image from Gyazo](https://i.gyazo.com/65ce25ac5676f33834cea55c7648b838.png)](https://gyazo.com/65ce25ac5676f33834cea55c7648b838)
 
 # ローカルでの動作方法
 以下のコマンドを入力してください
