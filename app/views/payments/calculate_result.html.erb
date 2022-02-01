@@ -1,7 +1,14 @@
-<p>精算結果出力ページです</p>
+<%= render 'shared/header' %>
 
-<div class="result">
-  <p>精算結果は<%= @pay_user.nickname %>が <%= @receive_user.nickname %> に <%= @result %>円支払う必要があります </p>
-</div>
+<div class="calculate-result-main">
+  <div>
+    <div class="calculate-result-title">
+      <p>精算結果出力ページ</p>
+    </div>
+  </div>
+
+    <div class="result">
+      <p>立替分を精算するためには<%= @pay_user.nickname %>さんが<%= @receive_user.nickname %>さんに<%= @result %>円支払う必要があります </p>
+    </div>
 
 <%= link_to "トップページへ" , root_path, class:"back-btn" %>

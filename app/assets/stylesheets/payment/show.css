@@ -46,6 +46,7 @@
   width: 120px;
   height: 30px;
   border: 2px outset	#BCA352;
+  text-decoration: none;
 }
 
 .show-back-btn{
