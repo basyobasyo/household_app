@@ -13,8 +13,8 @@ https://household-app-36683.herokuapp.com/
 
 # テスト用アカウント
 
-Basic認証 ID : test
-Basic認証 PW : 1111
+Basic認証 ID : test  
+Basic認証 PW : 1111  
 
 テストアカウント
 メインユーザー email : main@gmail.com
