@@ -1,6 +1,6 @@
 <header class="top-header">
 <div class="nav">
-  <h2 class="top-title"> Share Wallet</h2>
+  <%= link_to "Share Wallet", root_path, class:"top-title" %>
   <ul class='right-lists'>
     <% if user_signed_in? %>
       <li><%= link_to current_user.nickname, "#", class: "user-nickname" %> の家計簿 </li>
