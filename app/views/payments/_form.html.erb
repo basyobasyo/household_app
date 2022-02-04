@@ -2,10 +2,10 @@
 
   <%= render 'shared/error_messages', model: f.object %>
 
-  <div class="form-part">
-    支払い金額<br/>
-    <%= f.text_field :price, class:"price-form payment-form", id:"payment-info", placeholder:"支払い金額を入力してください" %>
-  </div>
+    <div class="form-part">
+      支払い金額<br/>
+      <%= f.text_field :price, class:"price-form payment-form", id:"payment-info", placeholder:"支払い金額を入力してください" %>
+    </div>
     <div class='date-form form-part'>
       <%= raw sprintf(
                   f.date_select(
