@@ -30,11 +30,9 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @payment.update(payment_params)
@@ -56,15 +54,14 @@ class PaymentsController < ApplicationController
     redirect_to root_path
   end
 
-  def calculate_page
-  end
+  def calculate_page; end
 
   def calculate_result
     date_from = date_complete(params['date_from(1i)'], params['date_from(2i)'], params['date_from(3i)'])
     date_to   = date_complete(params['date_to(1i)'], params['date_to(2i)'], params['date_to(3i)'])
-    if date_from == "" || date_to == ""
-      flash.now[:calculate_error] = "精算を行うことができませんでした。値が空では精算ができません。"
-      render action: "calculate_page"
+    if date_from == '' || date_to == ''
+      flash.now[:calculate_error] = '精算を行うことができませんでした。値が空では精算ができません。'
+      render action: 'calculate_page'
     elsif (Date.parse(date_to) - Date.parse(date_from)).to_i >= 0
       main_result = Payment.calculate(date_from, date_to, current_user.id)
       pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
@@ -75,13 +72,13 @@ class PaymentsController < ApplicationController
         @pay_user     = User.find(current_user.id)
         @receive_user = User.find(current_user.pair_id)
       elsif main_result == 0 && pair_result == 0
-        flash.now[:calculate_error] = "指定された期間に支払い情報がありませんでした。"
-        render action: "calculate_page"
+        flash.now[:calculate_error] = '指定された期間に支払い情報がありませんでした。'
+        render action: 'calculate_page'
       end
       @result = (main_result - pair_result).abs / 2
     elsif (Date.parse(date_to) - Date.parse(date_from)).to_i < 0
-      flash.now[:calculate_error] = "精算を行うことができませんでした。正しく値を入力して下さい。"
-      render action: "calculate_page"
+      flash.now[:calculate_error] = '精算を行うことができませんでした。正しく値を入力して下さい。'
+      render action: 'calculate_page'
     end
   end
 
@@ -107,10 +104,10 @@ class PaymentsController < ApplicationController
   end
 
   def date_complete(year, month, day)
-    if year != "" && month != "" && day != ""
+    if year != '' && month != '' && day != ''
       format('%04d', year) + format('%02d', month) + format('%02d', day)
     else
-      return ""
+      ''
     end
   end
 
@@ -119,6 +116,6 @@ class PaymentsController < ApplicationController
     data.each do |payment|
       result += payment[:price]
     end
-    return result
+    result
   end
 end
