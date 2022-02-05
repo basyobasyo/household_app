@@ -30,9 +30,11 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+  end
 
-  def edit; end
+  def edit
+  end
 
   def update
     if @payment.update(payment_params)
@@ -60,7 +62,10 @@ class PaymentsController < ApplicationController
   def calculate_result
     date_from = date_complete(params['date_from(1i)'], params['date_from(2i)'], params['date_from(3i)'])
     date_to   = date_complete(params['date_to(1i)'], params['date_to(2i)'], params['date_to(3i)'])
-    if (Date.parse(date_to) - Date.parse(date_from)).to_i >= 0
+    if date_from == "" || date_to == ""
+      flash.now[:calculate_error] = "精算を行うことができませんでした。値が空では精算ができません。"
+      render action: "calculate_page"
+    elsif (Date.parse(date_to) - Date.parse(date_from)).to_i >= 0
       main_result = Payment.calculate(date_from, date_to, current_user.id)
       pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
       if main_result > pair_result
@@ -71,10 +76,9 @@ class PaymentsController < ApplicationController
         @receive_user = User.find(current_user.pair_id)
       end
       @result = (main_result - pair_result).abs / 2
-    else
+    elsif (Date.parse(date_to) - Date.parse(date_from)).to_i < 0
       flash.now[:calculate_error] = "精算を行うことができませんでした。正しく値を入力して下さい。"
       render action: "calculate_page"
-      
     end
   end
 
@@ -100,7 +104,11 @@ class PaymentsController < ApplicationController
   end
 
   def date_complete(year, month, day)
-    format('%04d', year) + format('%02d', month) + format('%02d', day)
+    if year != "" && month != "" && day != ""
+      format('%04d', year) + format('%02d', month) + format('%02d', day)
+    else
+      return ""
+    end
   end
 
   def result(data)
