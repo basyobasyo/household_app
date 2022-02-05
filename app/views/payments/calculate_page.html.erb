@@ -4,6 +4,11 @@
   <div class="calculate-page-title">
    <p>精算ページ</p>
   </div>
+  <div>
+    <% flash.each do |name, value| %>
+      <%= content_tag(:div, value, class: name) %>
+    <% end %>
+  </div>
   <div class="sub-sentence">
     <p>精算の期間を指定してください。</p>
   </div>

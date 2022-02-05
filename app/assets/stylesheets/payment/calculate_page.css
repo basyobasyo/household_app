@@ -16,6 +16,11 @@
   font-size: 20px;
 }
 
+.calculate_error{
+  color: red;
+  padding: 20px;
+}
+
 .calculate-form{
   display: flex;
   flex-direction: column;

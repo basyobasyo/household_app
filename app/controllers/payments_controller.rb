@@ -60,16 +60,22 @@ class PaymentsController < ApplicationController
   def calculate_result
     date_from = date_complete(params['date_from(1i)'], params['date_from(2i)'], params['date_from(3i)'])
     date_to   = date_complete(params['date_to(1i)'], params['date_to(2i)'], params['date_to(3i)'])
-    main_result = Payment.calculate(date_from, date_to, current_user.id)
-    pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
-    if main_result > pair_result
-      @pay_user     = User.find(current_user.pair_id)
-      @receive_user = User.find(current_user.id)
-    elsif main_result < pair_result
-      @pay_user     = User.find(current_user.id)
-      @receive_user = User.find(current_user.pair_id)
+    if (Date.parse(date_to) - Date.parse(date_from)).to_i >= 0
+      main_result = Payment.calculate(date_from, date_to, current_user.id)
+      pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
+      if main_result > pair_result
+        @pay_user     = User.find(current_user.pair_id)
+        @receive_user = User.find(current_user.id)
+      elsif main_result < pair_result
+        @pay_user     = User.find(current_user.id)
+        @receive_user = User.find(current_user.pair_id)
+      end
+      @result = (main_result - pair_result).abs / 2
+    else
+      flash.now[:calculate_error] = "精算を行うことができませんでした。正しく値を入力して下さい。"
+      render action: "calculate_page"
+      
     end
-    @result = (main_result - pair_result).abs / 2
   end
 
   private
