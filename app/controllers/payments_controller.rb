@@ -74,6 +74,9 @@ class PaymentsController < ApplicationController
       elsif main_result < pair_result
         @pay_user     = User.find(current_user.id)
         @receive_user = User.find(current_user.pair_id)
+      elsif main_result == 0 && pair_result == 0
+        flash.now[:calculate_error] = "指定された期間に支払い情報がありませんでした。"
+        render action: "calculate_page"
       end
       @result = (main_result - pair_result).abs / 2
     elsif (Date.parse(date_to) - Date.parse(date_from)).to_i < 0
