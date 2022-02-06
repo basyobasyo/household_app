@@ -111,8 +111,8 @@
             </div>
             <div class="right-content">
                 <%= image_tag "Orion_edit.png", class:"right-content-icon", id:"lists-icon" %>
-                <div class="lists"> 
-                  <ul class="payment-lists hidden">
+                <div class="lists", id="list"> 
+                  <ul class="payment-lists">
                     <li class="payment-list"><%= link_to "詳細", payment_path(payment.id), class:"detail-text" %></li>
                     <li class="payment-list"><%= link_to "編集", payment_path(payment.id), class:"detail-text" %></li> 
                     <li class="payment-list"><%= link_to "削除", payment_path(payment.id), class:"detail-text" %></li>

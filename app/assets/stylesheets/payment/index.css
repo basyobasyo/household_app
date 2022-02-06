@@ -88,10 +88,12 @@
 .left-content{
   width: 20vw;
   padding-left: 30px;
+  padding-top: 3px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   height: 70px;
+  font-size: 17px;
 }
 
 .page-left-bottom{
@@ -193,16 +195,10 @@
   display: none;
 }
 
-.payment-list{
-}
 
 .detail-text{
   color: #111;
   text-decoration: none;
-}
-
-.hidden{
-  /* display: none; */
 }
 
 
