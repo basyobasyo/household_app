@@ -102,11 +102,22 @@
         <% @payments.each do |payment| %>
           <div class="contents">
             <div class="left-content">
-              <p><%= payment.registration_date %></p>
-              <p> 金額 ￥<%= payment.price %>円 </p>
+              <div class="content-date">
+                <p><%= payment.registration_date %></p>
+              </div>
+              <div class="content-pay">
+                <p> 金額 ￥<%= payment.price %>円 </p>
+              </div>
             </div>
             <div class="right-content">
-                <%= link_to image_tag("Orion_edit.png", class:"right-content-icon" ), payment_path(payment.id) %> 
+                <%= image_tag "Orion_edit.png", class:"right-content-icon", id:"lists-icon" %>
+                <div class="lists"> 
+                  <ul class="payment-lists hidden">
+                    <li class="payment-list"><%= link_to "詳細", payment_path(payment.id), class:"detail-text" %></li>
+                    <li class="payment-list"><%= link_to "編集", payment_path(payment.id), class:"detail-text" %></li> 
+                    <li class="payment-list"><%= link_to "削除", payment_path(payment.id), class:"detail-text" %></li>
+                  </ul>
+                </div>
             </div>
           </div>
         <% end %>
