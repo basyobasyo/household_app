@@ -66,3 +66,7 @@ end
 gem 'factory_bot_rails'
 gem 'faker'
 gem 'rspec-rails', '~> 4.0.0'
+
+group :production do
+  gem 'unicorn', '5.4.1'
+end
