@@ -57,6 +57,10 @@ Basic認証 PW : 1111
 ＊ログイン  
 [![Image from Gyazo](https://i.gyazo.com/c3eafa25c071be7c9840a25934e9ed10.gif)](https://gyazo.com/c3eafa25c071be7c9840a25934e9ed10)
 ・ログイン時はメールアドレス、パスワードを入力し、「ログインする」を押下する。  
+
+＊ペア登録
+[![Image from Gyazo](https://i.gyazo.com/b0c8d740c6f3fef889fbfa1f95c125a7.gif)](https://gyazo.com/b0c8d740c6f3fef889fbfa1f95c125a7)
+・家計を共有する相手を選択し、「登録する」を押下する。登録後は、画面右上「ペア登録」が表示され、相手の名前が表示される。
  
 ②支払い情報保存機能  
 
