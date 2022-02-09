@@ -1,6 +1,10 @@
+.logout-top{
+  height: calc(100vh - 55px);
+}
+
 .top-sentence{
   display: flex;
-  padding: 50px;
+  /* padding: 50px; */
   justify-content: space-around;
 }
 
@@ -20,7 +24,7 @@
 
 .top-sentence-center{
   display: flex;
-  margin-top: 150px;
+  margin-top: 170px;
 }
 
 .title-in-sentence{
@@ -29,7 +33,7 @@
 
 .center-sentence{
   font-size: 60px;
-  padding-top: 25px;
+  /* padding-top: 25px; */
 }
 
 .sub-sentence{
@@ -39,14 +43,14 @@
 .bottom-icon{
   display: flex;
   justify-content: space-between;
-  padding: 0px 60px;
+  padding: 0px 50px;
 }
 
 .main-page{
   display: flex;
   font-family: 'Noto Sans JP', sans-serif; 
   background-color: #F7F6EB;
-  height: 100vh;
+  height: calc(100vh - 55px);
 }
 
 .page-left{
