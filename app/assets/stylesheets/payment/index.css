@@ -4,7 +4,6 @@
 
 .top-sentence{
   display: flex;
-  /* padding: 50px; */
   justify-content: space-around;
 }
 
@@ -33,7 +32,6 @@
 
 .center-sentence{
   font-size: 60px;
-  /* padding-top: 25px; */
 }
 
 .sub-sentence{
