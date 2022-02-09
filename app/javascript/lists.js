@@ -18,7 +18,6 @@ const display = () => {
     if (e.target.className != "right-content-icon"){
       RightList.forEach(function(list){
         list.removeAttribute("style", "display: block;");
-        console.log("アイコン以外がクリックされました");
       });
     };
   });
@@ -39,35 +38,6 @@ const display = () => {
   };
 
 
-  //
-  // window.addEventListener("click", (e) => {
-  //   if (e.target.className != "right-content-icon"){
-  //     RightList.forEach(function(list){
-  //       list.removeAttribute("style", "display: block;");
-  //       console.log("アイコン以外がクリックされました");
-  //     });
-  //   };
-  //   // if (e.target.className == "right-content-icon"){
-  //   //   for(let i = 0; i < RightIcon.length; i ++ ){
-  //   //     RightIcon[i].addEventListener("click", () => {
-  //   //       RightList[i].setAttribute("style", "display: block;");
-  //   //       });
-  //   //   };
-  //   // };
-  // });
-
-  // for(let i = 0; i < RightIcon.length; i ++ ){
-  //   RightIcon[i].addEventListener("click", () => {
-  //     // console.log(`${i}がクリックされました`);
-  //     if (RightList[i].getAttribute("style") == "display: block;"){
-  //       RightList[i].removeAttribute("style", "display: block;");
-  //     } else {
-  //       RightList[i].setAttribute("style", "display: block;");
-  //     };
-  //   });
-  // };
-
-  
 };
 
 window.addEventListener("load", display);

@@ -2,6 +2,7 @@
 
 <%# 未ログイン時のトップページ %>
 <% unless user_signed_in? %>
+<div class="logout-top">
   <div class="top-sentence">
         <div class="top-sentence-left">
           <%= image_tag "y1162-1.png", class:"icon" %>
@@ -25,6 +26,7 @@
     <%= image_tag "y1161-2.png", class:"icon" %>
     <%= image_tag "y1155.png", class:"icon" %>
   </div>
+</div>
 <%# //未ログイン時のトップページ %>
 <% else %>
 <div class="main-page">

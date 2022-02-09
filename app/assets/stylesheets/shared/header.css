@@ -1,7 +1,8 @@
 .top-header{
+  height: 55px;
   width: 100vw;
   background-color: #FBD01D;
-  padding: 10px ;
+  line-height: 55px;
 }
 
 .nav{
@@ -25,7 +26,7 @@
 }
 
 .right-lists li{
-  padding: 5px 60px 5px 0px;
+  padding-right: 55px;
 }
 
 .user-nickname{
