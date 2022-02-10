@@ -23,7 +23,6 @@ class PaymentsController < ApplicationController
 
   def create
     @payment = Payment.new(payment_params)
-    binding.pry
     if @payment.save
       redirect_to root_path
     else
@@ -60,8 +59,6 @@ class PaymentsController < ApplicationController
   def calculate_result
     date_from = params[:date_from]
     date_to   = params[:date_to]
-    # date_from = date_complete(params['date_from(1i)'], params['date_from(2i)'], params['date_from(3i)'])
-    # date_to   = date_complete(params['date_to(1i)'], params['date_to(2i)'], params['date_to(3i)'])
     if date_from == '' || date_to == ''
       flash.now[:calculate_error] = '精算を行うことができませんでした。値が空では精算ができません。'
       render action: 'calculate_page'
@@ -105,14 +102,6 @@ class PaymentsController < ApplicationController
   def set_params
     @payment = Payment.find(params[:id])
   end
-
-  # def date_complete(year, month, day)
-  #   if year != '' && month != '' && day != ''
-  #     format('%04d', year) + format('%02d', month) + format('%02d', day)
-  #   else
-  #     ''
-  #   end
-  # end
 
   def result(data)
     result = 0
