@@ -6,7 +6,7 @@
       支払い金額<br/>
       <%= f.text_field :price, class:"price-form payment-form", id:"payment-info", placeholder:"支払い金額を入力してください" %>
     </div>
-    <div class='date-form form-part'>
+    <%# <div class='date-form form-part'>
       <%= raw sprintf(
                   f.date_select(
                     :registration_date,
@@ -17,8 +17,12 @@
                     start_year: 2022,
                     end_year: (Time.now.year),
                     date_separator: '%s'),
-                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" %>
+                  "<p> 年 </p>", "<p> 月 </p>") + "<p> 日 </p>" 
+    </div> %>
+    <div class="form-part">
+      <%= f.date_field :registration_date, class:"payment-form" %>
     </div>
+
     <div class="form-part">
       カテゴリーの選択<br/>
       <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box payment-form", id:"payment-category"}) %>
@@ -34,3 +38,4 @@
       <%= link_to "トップページへ戻る", root_path, class:"back-btn payment-form" %>
     </div>
 <% end %>
+

@@ -16,16 +16,16 @@
   width: 15vw;
 }
 
-.date-form{
+/* .date-form{
   display: flex;
   justify-content: center;
-}
+} */
 
 .date-form p{
   padding-top: 1.5vh;
 }
 
-/* 精算ページにて使用 */
+/* 精算ページにても使用 */
 .date-form select{
   width: 100px;
   height: 45px;
