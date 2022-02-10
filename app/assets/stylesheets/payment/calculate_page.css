@@ -27,21 +27,29 @@
   align-items: center;
 }
 
-.sub-sentence{
-  padding: 20px;
+.calculate-block{
+  height: 40vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
 }
 
-.input-calculate-date{
-  padding: 10px;
+.sub-sentence{
+  padding: 35px 0px 20px 0px;
 }
+
+.calculate-date{
+  text-align: center;
+  padding-left: 40px;
+  width: 285px;
+  height: 40px;
+}
+
 
 .calculate-btn{
   width: 330px;
   height: 40px;
   background-color: #F2B33D;
   color: #fff;
-}
-
-.block-calculate-btn{
-  padding: 20px;
 }

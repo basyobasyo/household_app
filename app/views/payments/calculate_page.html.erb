@@ -1,51 +1,37 @@
+<%# ヘッダーの挿入 %>
 <%= render 'shared/header'%>
+<%# // ヘッダーの挿入 %>
 
+<%# 精算フォーム %>
 <div class="calculate-page-main">
   <div class="calculate-page-title">
    <p>精算ページ</p>
   </div>
+  <%# エラーメッセージの表示 %>
   <div>
     <% flash.each do |name, value| %>
       <%= content_tag(:div, value, class: name) %>
     <% end %>
   </div>
+  <%# // エラーメッセージの表示 %>
   <div class="sub-sentence">
     <p>精算の期間を指定してください。</p>
   </div>
     <%= form_with url: calculate_result_payments_path, method: :post, class:"calculate-form", local: true do |f|%>
-
-      <div class='input-calculate-date date-form'>
-        <%= raw sprintf(
-                    f.date_select(
-                      :date_from,
-                      class:'select-date',
-                      id:"calculate-date",
-                      use_month_numbers: true,
-                      prompt:'-',
-                      start_year: 2022,
-                      end_year: (Time.now.year),
-                      date_separator: '%s'),
-                    "<p> 年 </p>", "<p> 月 </p>") + "<p> 日から </p>" %>
-      </div>
-
-      <div class='input-calculate-date date-form'>
-        <%= raw sprintf(
-                    f.date_select(
-                      :date_to,
-                      class:'select-date',
-                      id:"calculate-date",
-                      use_month_numbers: true,
-                      prompt:'-',
-                      start_year: 2022,
-                      end_year: (Time.now.year),
-                      date_separator: '%s'),
-                    "<p> 年 </p>", "<p> 月 </p>") + "<p> 日まで </p>" %>
-      </div>
-      <div class="block-calculate-btn">
-        <%= f.submit '精算を実行する', class:"calculate-btn" %>
-      </div>
-      <div>
-        <%= link_to 'トップページに戻る', root_path, class:"back-btn" %>
+      <div class="calculate-block">
+        <div>
+          <%= f.date_field :date_from, class:"calculate-date" %>
+        </div>
+        <div>
+          <%= f.date_field :date_to  , class:"calculate-date" %>
+        </div>
+        <div>
+          <%= f.submit '精算を実行する', class:"calculate-btn" %>
+        </div>
+        <div>
+          <%= link_to 'トップページに戻る', root_path %>
+        </div>
       </div>
     <% end %>
 </div>
+<%# // 精算フォーム %>
