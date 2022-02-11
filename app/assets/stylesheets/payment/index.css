@@ -86,18 +86,6 @@
   width: 40vw;
 }
 
-
-.left-content{
-  width: 20vw;
-  padding-left: 30px;
-  padding-top: 3px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  height: 70px;
-  font-size: 17px;
-}
-
 .page-left-bottom{
   display: flex;
   justify-content: space-between;
@@ -154,19 +142,25 @@
   text-align: center;
 }
 
-.right-content{
-  width: 15vw;
-  display: flex;
-  align-items: center;
-  padding-left: 5vw;
-}
-
 .contents{
   display: flex;
   justify-content: space-around;
   border: 2px groove #F7CA79;
   margin-top: 10px;
-  height: 80px;
+  /* height: 80px; */
+  height: 40px;
+}
+
+.left-content{
+  width: 20vw;
+  line-height: 32px;
+  padding-left: 30px;
+  padding-top: 3px;
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: space-around; */
+  /* height: 70px; */
+  font-size: 17px;
 }
 
 .content-date{
@@ -175,6 +169,15 @@
 
 .content-pay{
   text-align: center;
+  padding-left: 20px;
+}
+
+.right-content{
+  width: 15vw;
+  /* display: flex; */
+  /* align-items: center; */
+  padding-left: 5vw;
+  position: relative;
 }
 
 .page-right-title{
@@ -195,6 +198,9 @@
   border:1px solid #F7CA79;
   background-color: #fff;
   display: none;
+  position: absolute;
+  top: 10px;
+  right: 50px;
 }
 
 
