@@ -54,6 +54,12 @@ class PaymentsController < ApplicationController
     redirect_to root_path
   end
 
+  def unfollow
+    user_id = params[:id]
+    User.pair_unfollow(user_id)
+    redirect_to root_path
+  end 
+
   def calculate_page; end
 
   def calculate_result

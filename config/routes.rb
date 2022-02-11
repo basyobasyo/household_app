@@ -7,6 +7,6 @@ Rails.application.routes.draw do
       get  'calculate_page'
       post 'calculate_result'
     end
-      delete "unfollow", on: :member
+      patch "unfollow", on: :member
   end
 end

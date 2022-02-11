@@ -9,7 +9,7 @@
       <div>
         <li id="pair-nickname" class="pair-name-position"> ペア登録先 : <%= link_to current_user.pair.nickname, "#", class: "pair-nickname" %>さん</li>
           <div class="hidden" id="pull-down">
-            <%= link_to "ペアの解除", unfollow_payment_path(current_user.id) , class:"unfollow-link" %>
+            <%= link_to "ペアの解除", unfollow_payment_path(current_user.id), method: :patch, data: {confirm: "ペア登録を解除してもよろしいですか？"}, class:"unfollow-link" %>
           </div>
       </div>
       <% end %>

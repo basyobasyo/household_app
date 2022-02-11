@@ -32,5 +32,12 @@ class User < ApplicationRecord
     user.update(pair_id: another_id)
     another_user.update(pair_id: follow_id)
   end
-    # // フォロー機能のメソッド
+  # // フォロー機能のメソッド
+
+  # フォロー解除メソッド
+  def self.pair_unfollow(user_id)
+    pair_id = User.find(user_id).pair_id
+    User.where(pair_id: [user_id, pair_id]).update_all(pair_id: nil)
+  end
+  # // フォロー解除メソッド
 end
