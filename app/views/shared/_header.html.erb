@@ -3,10 +3,15 @@
   <%= link_to "Share Wallet", root_path, class:"top-title" %>
   <ul class='right-lists'>
     <% if user_signed_in? %>
-      <li><%= link_to current_user.nickname, "#", class: "user-nickname" %> の家計簿 </li>
+      <li><%= link_to current_user.nickname, "#", class: "user-nickname" %> さんの家計簿 </li>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
       <% if current_user.pair_id %>
-        <li> ペア登録 : <%= link_to current_user.pair.nickname, "#", class: "pair-nickname" %></li>
+      <div>
+        <li id="pair-nickname" class="pair-name-position"> ペア登録先 : <%= link_to current_user.pair.nickname, "#", class: "pair-nickname" %>さん</li>
+          <div class="hidden" id="pull-down">
+            <%= link_to "ペアの解除", unfollow_payment_path(current_user.id), method: :patch, data: {confirm: "ペア登録を解除してもよろしいですか？"}, class:"unfollow-link" %>
+          </div>
+      </div>
       <% end %>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path, class: "login" %></li>

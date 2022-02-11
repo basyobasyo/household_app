@@ -5,11 +5,11 @@ const display = () => {
 
   RightIcon.forEach(function(icon){
     icon.addEventListener("mouseover", () => {
-      document.body.style.cursor = "pointer";
+      icon.setAttribute("style", "cursor: pointer;");
     });
 
     icon.addEventListener("mouseout", () => {
-      document.body.style.cursor = "default";
+      icon.removeAttribute("style", "cursor: default;");
     });
   
   });
@@ -19,7 +19,7 @@ const display = () => {
       RightList.forEach(function(list){
         list.removeAttribute("style", "display: block;");
       });
-    };
+    }
   });
 
   for(let i = 0; i < RightIcon.length; i ++ ){
@@ -27,15 +27,15 @@ const display = () => {
       RightList.forEach(function(list){
         if (list.getAttribute("style") == "display: block;"){
           list.removeAttribute("style", "display: block;");
-        };
+        }
       });
       if (RightList[i].getAttribute("style") == "display: block;"){
         RightList[i].removeAttribute("style", "display: block;");
       } else {
         RightList[i].setAttribute("style", "display: block;");
-      };
+      }
     });
-  };
+  }
 
 
 };
