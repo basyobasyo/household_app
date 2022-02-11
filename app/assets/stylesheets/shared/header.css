@@ -26,12 +26,33 @@
 }
 
 .right-lists li{
-  padding-right: 55px;
+  margin-right: 55px;
 }
 
 .user-nickname{
   text-decoration: none;
   color: #111;
+}
+
+.pair-name-position{
+  position: relative;
+}
+
+.hidden{
+  text-align: center;
+  line-height: 45px;
+  width: 100px;
+  position: absolute;
+  right: 70px;
+  top: 55px;
+  background-color: #fff;
+  border: 2px solid #FAD26A;
+  display: none;
+}
+
+.unfollow-link{
+  color: #111;
+  text-decoration: none;
 }
 
 .logout{
