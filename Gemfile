@@ -78,3 +78,5 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano-rbenv'
 end
+
+gem 'kaminari'
