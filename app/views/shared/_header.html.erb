@@ -4,7 +4,7 @@
   <ul class='right-lists'>
     <% if user_signed_in? %>
       <li><%= link_to current_user.nickname, "#", class: "user-nickname" %> さんの家計簿 </li>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li> 
+      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, data: {confirm: "ログアウトします。よろしいですか？"}, class: "logout" %></li> 
       <% if current_user.pair_id %>
       <div>
         <li id="pair-nickname" class="pair-name-position"> ペア登録先 : <%= link_to current_user.pair.nickname, "#", class: "pair-nickname" %>さん</li>
