@@ -129,6 +129,29 @@ Basic認証 PW : 1111
 
 [![Image from Gyazo](https://i.gyazo.com/65ce25ac5676f33834cea55c7648b838.png)](https://gyazo.com/65ce25ac5676f33834cea55c7648b838)
 
+# 使用技術（開発環境）
+
+## バックエンド
+ruby
+Ruby on rails
+
+## フロントエンド
+HTML,CSS,JavaScript
+
+## データベース
+MySQL
+
+## インフラ
+Heroku
+
+## ソース管理
+GitHub,GithubDesktop
+
+## テスト
+RSpec
+
+## エディタ
+VScod
 # ローカルでの動作方法
 以下のコマンドを入力してください
 
