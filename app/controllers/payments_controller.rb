@@ -12,7 +12,7 @@ class PaymentsController < ApplicationController
         @main_result = result(main_payments)
         @pair_result = result(pair_payments)
       else
-        @payments = Payment.where(user_id: current_user.id).where(registration_date: (30.days.ago)..(Time.now)).order('registration_date DESC')
+        @payments = Payment.where(user_id: current_user.id).where(registration_date: (30.days.ago)..(Time.now)).page(params[:page]).per(10).order('registration_date DESC')
       end
     end
   end
