@@ -159,6 +159,7 @@
 
 .content-date{
   text-align: center;
+  padding-left: 20px;
 }
 
 .content-pay{
@@ -172,8 +173,6 @@
 
 .right-content{
   width: 10vw;
-  /* display: flex; */
-  /* align-items: center; */
   padding-left: 5vw;
   position: relative;
 }
