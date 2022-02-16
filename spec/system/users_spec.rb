@@ -41,7 +41,7 @@ RSpec.describe 'ユーザー新規登録', type: :system do
     end
   end
   context 'ユーザー新規登録ができないとき' do
-    it '誤った情報ではユーザー新規登録ができずに新規登録ページへ戻ってくる' do
+    it '誤った情報ではユーザー新規登録ができずに新規登録ページへ戻る' do
       # トップページに移動する
       visit root_path
       # トップページにサインアップページへ遷移するボタンがあることを確認する
@@ -59,6 +59,52 @@ RSpec.describe 'ユーザー新規登録', type: :system do
       }.to change{User.count}.by(0)
       # 新規登録ページへ戻されることを確認する
       expect(current_path).to eq('/users')
+    end
+  end
+end
+
+
+RSpec.describe 'ユーザーログイン', type: :system do
+  before do
+    @user = FactoryBot.create(:user)
+  end
+  context 'ユーザーログインができるとき' do
+    it '正しい情報を入力すれば、ログインが完了し、トップページに移動する' do
+      # トップページに移動
+      visit root_path
+      # ログインボタンが存在する
+      expect(page).to have_content("ログイン")
+      # ログインページへ移動する
+      visit new_user_session_path
+      # ユーザーのログイン情報を入力する
+      fill_in 'Email', with: @user.email
+      fill_in 'パスワード', with: @user.password
+      # ログインボタンを押す
+      find('input[name="commit"]').click
+      # ログイン後のトップページへ移動する
+      expect(current_path).to eq root_path
+      # 遷移後のページにサインアップ、ログインのリンクが表示されていない
+      expect(page).to have_no_content("新規登録")
+      expect(page).to have_no_content("ログイン")
+      # 遷移後のページに@userの名前が表示されている
+      expect(page).to have_content(@user.nickname)
+    end
+  end
+  context 'ログインができないとき' do
+    it '誤った内容でログインすると、ログインページに戻る' do
+      # トップページに移動
+      visit root_path
+      # ログインボタンが存在する
+      expect(page).to have_content("ログイン")
+      # ログインページに移動
+      visit new_user_session_path
+      # ユーザー情報の入力を行う
+      fill_in "Email", with: ''
+      fill_in "パスワード", with: ''
+      # ログインボタンを押す
+      find('input[name="commit"]').click
+      # ログインページに戻されることを確認する
+      expect(current_path).to eq('/users/sign_in')
     end
   end
 end
