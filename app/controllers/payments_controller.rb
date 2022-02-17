@@ -1,6 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
   before_action :set_params, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: :index
 
   def index
     if user_signed_in?
@@ -107,6 +108,9 @@ class PaymentsController < ApplicationController
 
   def set_params
     @payment = Payment.find(params[:id])
+    if @payment.user != current_user
+      redirect_to root_path
+    end
   end
 
   def result(data)
