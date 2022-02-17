@@ -1,6 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :pair_check, only: :index
-  before_action :set_params, only: %i[show edit update destroy]
+  before_action :set_params, only: %i[edit update destroy]
   before_action :authenticate_user!, except: :index
 
   def index
@@ -31,7 +31,12 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def show; end
+  def show
+    @payment = Payment.find(params[:id])
+    unless (@payment.user == current_user || @payment.user == current_user.pair)
+      redirect_to root_path
+    end
+  end
 
   def edit; end
 
