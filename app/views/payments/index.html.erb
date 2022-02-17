@@ -119,9 +119,10 @@
                 <div class="lists", id="list"> 
                   <ul class="payment-lists">
                     <li class="payment-list"><%= link_to "詳細", payment_path(payment.id),method: :get, class:"detail-text" %></li>
-                    <li class="payment-list"><%= link_to "編集", edit_payment_path(payment.id), method: :get, class:"detail-text" %></li> 
-                    <li class="payment-list"><%= link_to "削除", payment_path(payment.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"detail-text" %></li>
-
+                    <% if current_user == payment.user %>
+                      <li class="payment-list"><%= link_to "編集", edit_payment_path(payment.id), method: :get, class:"detail-text" %></li> 
+                      <li class="payment-list"><%= link_to "削除", payment_path(payment.id), method: :delete, data: {confirm: "本当に削除しますか？"}, class:"detail-text" %></li>
+                    <% end %>
                   </ul>
                 </div>
             </div>

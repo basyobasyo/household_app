@@ -189,14 +189,14 @@
 }
 
 .lists{
-  height: 75px;
+  line-height: 27px;
   width: 100px;
   text-align: center;
   border:1px solid #F7CA79;
   background-color: #fff;
   display: none;
   position: absolute;
-  top: 10px;
+  top: 7px;
   right: 10px;
   z-index: 1;
 }
