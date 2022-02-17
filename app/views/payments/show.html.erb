@@ -25,11 +25,12 @@
         <p class="show-text"><%= @payment.memo%></p>
       </div>
     </div>
-    <div class="show-links">
-      <%= link_to "編集", edit_payment_path, method: :get    ,class:"show-link"%>
-      <%= link_to "削除", payment_path     , method: :delete ,class:"show-link", data: {confirm: "本当に削除しますか？"} %>
-    </div>
-
+    <% if current_user == @payment.user %>
+      <div class="show-links">
+        <%= link_to "編集", edit_payment_path, method: :get    ,class:"show-link"%>
+        <%= link_to "削除", payment_path     , method: :delete ,class:"show-link", data: {confirm: "本当に削除しますか？"} %>
+      </div>
+    <% end %>
     <%= link_to "トップページへ戻る", root_path, class:"show-back-btn"%>
   </div>
 </div>
