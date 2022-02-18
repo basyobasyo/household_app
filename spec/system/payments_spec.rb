@@ -11,7 +11,7 @@ RSpec.describe "支払い情報投稿", type: :system do
       @payment = FactoryBot.build(:payment)
       # トップページに表示させるため、本日の日付にする。
       @payment.registration_date = Date.today
-      @payment.save
+      @payment.user.save
     end
     context '新規入力ができるとき' do
       it '全ての情報が正しく入力できている' do
@@ -38,6 +38,10 @@ RSpec.describe "支払い情報投稿", type: :system do
         }.to change{Payment.count}.by(1)
         # 投稿後はトップページに戻る。
         expect(current_path).to eq root_path
+        # 入力した内容がトップページに表示されている。
+        expect(page).to have_content("￥#{@payment.price}円")
+        expect(page).to have_content("#{@payment.registration_date.strftime("%Y-%m-%d")}")
+        expect(page).to have_content("カテゴリー:#{@payment.category.name}")
       end
     end
     context '新規投稿できないとき' do
@@ -52,3 +56,12 @@ RSpec.describe "支払い情報投稿", type: :system do
       end
     end
 end
+
+# RSpec.describe "支払い情報編集", type: :system do
+#   before do
+#     @payment = FactoryBot.build(:payment)
+#     # トップページに表示させるため、本日の日付にする。
+#     @payment.registration_date = Date.today
+#     @payment.save
+#   end
+# end
