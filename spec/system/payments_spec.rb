@@ -17,12 +17,7 @@ RSpec.describe "支払い情報投稿", type: :system do
       it '全ての情報が正しく入力できている' do
         # ログインを行う
         basic_pass new_user_session_path
-        visit new_user_session_path
-        fill_in "Email", with: @payment.user.email
-        fill_in "パスワード", with: @payment.user.password
-        find('input[name="commit"]').click
-        # ログイン後にトップページに移動していることの確認
-        expect(current_path).to eq root_path
+        sign_in(@payment.user)
         # トップページに「新規入力画面へ」のリンクがある
         expect(page).to have_content("新規入力画面へ")
         # 新規入力画面へ移動する
@@ -57,11 +52,26 @@ RSpec.describe "支払い情報投稿", type: :system do
     end
 end
 
-# RSpec.describe "支払い情報編集", type: :system do
-#   before do
-#     @payment = FactoryBot.build(:payment)
-#     # トップページに表示させるため、本日の日付にする。
-#     @payment.registration_date = Date.today
-#     @payment.save
-#   end
-# end
+RSpec.describe "支払い情報編集", type: :system do
+  # メインのユーザー、メインのユーザーのペア登録をするユーザー、ペア登録されていないユーザーを用意
+  before do
+    @payment1 = FactoryBot.build(:payment)
+    @payment1.registration_date = Date.today
+    @payment1.save
+
+    @payment2 = FactoryBot.build(:payment)
+    @payment2.registration_date = Date.today
+    @payment2.save
+
+    @payment3 = FactoryBot.build(:payment)
+    @payment3.registration_date = Date.today
+    @payment3.save
+  end
+  context '投稿の編集ができるとき' do
+    it 'ログインしたユーザーは自分の投稿した内容を編集できる' do
+      # ログインを行う
+      basic_pass new_user_session_path
+      sign_in(@payment1.user)
+    end
+  end
+end
