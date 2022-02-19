@@ -28,6 +28,7 @@ RSpec.describe "支払い情報投稿", type: :system do
         select "#{@payment.category.name}", from: 'payment[category_id]'
         fill_in "備考があれば入力してください", with: @payment.memo
         # 新規投稿のボタンを押す
+        # 投稿の件数が増える
         expect{
           find('input[name="commit"]').click
         }.to change{Payment.count}.by(1)
@@ -66,12 +67,48 @@ RSpec.describe "支払い情報編集", type: :system do
     @payment3 = FactoryBot.build(:payment)
     @payment3.registration_date = Date.today
     @payment3.save
+
+    @sample = FactoryBot.build(:payment)
   end
   context '投稿の編集ができるとき' do
     it 'ログインしたユーザーは自分の投稿した内容を編集できる' do
       # ログインを行う
       basic_pass new_user_session_path
       sign_in(@payment1.user)
+      # 編集アイコンをクリック
+      find('img[id="lists-icon"]').click
+      # ログインユーザーが投稿した項目に編集ボタンがある
+      expect(page).to have_link '編集', href: edit_payment_path(@payment1)
+      # 編集ページへ移動する
+      visit edit_payment_path(@payment1)
+      # 既に投稿した内容が入力されている
+      expect(
+        find('input[name="payment[price]"]').value
+      ).to eq("#{@payment1.price}")
+      expect(
+        find('input[name="payment[registration_date]"]').value
+      ).to eq("#{@payment1.registration_date}")
+      expect(
+        find('select[name="payment[category_id]"]').value
+      ).to eq("#{@payment1.category_id}")
+      expect(
+        find('textarea[name="payment[memo]"]').value
+      ).to eq("#{@payment1.memo}")
+      # 投稿内容を編集する
+      fill_in 'payment-price', with: 10000
+      fill_in 'payment_registration_date', with: (Date.today - 1)
+      select "#{@sample.category.name}", from: 'payment[category_id]'
+      fill_in 'payment-memo', with: "備考欄です"
+      # 編集を行なっても、Paymentテーブルのデータの件数は変わらない
+      expect{
+        find('input[name="commit"]').click
+      }.to change{Payment.count}.by(0)
+      # 編集後はトップページに移動している
+      expect(current_path).to eq root_path
+      # 編集した内容がトップページに表示されている
+      expect(page).to have_content("￥10000円")
+      expect(page).to have_content("#{(Date.today - 1).strftime("%Y-%m-%d")}")
+      expect(page).to have_content("カテゴリー:#{@sample.category.name}")
     end
   end
 end

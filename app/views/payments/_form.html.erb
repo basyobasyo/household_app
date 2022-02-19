@@ -7,7 +7,7 @@
 
     <div class="form-part">
       支払い金額<br/>
-      <%= f.text_field :price, class:"price-form payment-form", id:"payment-info", placeholder:"支払い金額を入力してください" %>
+      <%= f.text_field :price, class:"price-form payment-form", id:"payment-price", placeholder:"支払い金額を入力してください" %>
     </div>
     <div class="form-part">
       <%= f.date_field :registration_date, class:"payment-form" %>
@@ -19,7 +19,7 @@
     </div>
     <div class="form-part">
       備考欄<br/>
-      <%= f.text_area :memo, class:"memo-form payment-form", id:"payment-info", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
+      <%= f.text_area :memo, class:"memo-form payment-form", id:"payment-memo", placeholder:"備考があれば入力してください", rows:"3", maxlength:"200" %>
     </div>
     <div class="form-part">
       <%= f.submit "入力を保存する", class:"payment-btn payment-form" %>
