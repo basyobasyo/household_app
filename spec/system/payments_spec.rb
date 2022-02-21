@@ -56,18 +56,19 @@ end
 RSpec.describe "支払い情報編集", type: :system do
   # メインのユーザー、メインのユーザーのペア登録をするユーザー、ペア登録されていないユーザーを用意
   before do
-    @payment1 = FactoryBot.build(:payment)
-    @payment1.registration_date = Date.today
-    @payment1.save
+    @payment1 = FactoryBot.create(:payment)
+    @payment2 = FactoryBot.create(:payment)
+    @payment3 = FactoryBot.create(:payment)
 
-    @payment2 = FactoryBot.build(:payment)
-    @payment2.registration_date = Date.today
-    @payment2.save
+    @payment1.update(registration_date: Date.today)
+    @payment2.update(registration_date: Date.today)
 
-    @payment3 = FactoryBot.build(:payment)
-    @payment3.registration_date = Date.today
-    @payment3.save
+    @user1 = @payment1.user
+    @user1.update(pair_id: @payment2.user.id)
 
+    @user2 = @payment2.user
+    @user2.update(pair_id: @payment1.user.id)
+    
     @sample = FactoryBot.build(:payment)
   end
   context '投稿の編集ができるとき' do
@@ -76,7 +77,7 @@ RSpec.describe "支払い情報編集", type: :system do
       basic_pass new_user_session_path
       sign_in(@payment1.user)
       # 編集アイコンをクリック
-      find('img[id="lists-icon"]').click
+        all('.right-content-icon')[0].click
       # ログインユーザーが投稿した項目に編集ボタンがある
       expect(page).to have_link '編集', href: edit_payment_path(@payment1)
       # 編集ページへ移動する
@@ -111,4 +112,24 @@ RSpec.describe "支払い情報編集", type: :system do
       expect(page).to have_content("カテゴリー:#{@sample.category.name}")
     end
   end
+  # context '編集ができないとき' do
+  #   it 'ログインしていないと編集ページへ移動できない' do
+  #     # 未ログインの状態でトップページへ移動する
+  #     visit root_path
+  #     # 未ログインでは編集へのリンクが存在しない
+  #     expect(page).to have_no_content("編集")
+  #     # 編集ページにアクセスすると、トップページへ移動する
+  #     visit edit_payment_path(@payment1)
+  #     expect(current_path).to eq root_path
+  #   end
+  #   it 'ログイン時でもペア登録ユーザーの投稿と他ユーザー投稿分は編集ができない' do
+  #     # トップページに移動する
+  #     visit root_path
+  #     # ログインを行う
+  #     sign_in(@payment1.user)
+  #     # 編集アイコンをクリック
+  #     find('img[id="lists-icon"]').click
+  #     binding.pry
+  #   end
+  # end
 end
