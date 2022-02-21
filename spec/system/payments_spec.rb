@@ -112,24 +112,28 @@ RSpec.describe "支払い情報編集", type: :system do
       expect(page).to have_content("カテゴリー:#{@sample.category.name}")
     end
   end
-  # context '編集ができないとき' do
-  #   it 'ログインしていないと編集ページへ移動できない' do
-  #     # 未ログインの状態でトップページへ移動する
-  #     visit root_path
-  #     # 未ログインでは編集へのリンクが存在しない
-  #     expect(page).to have_no_content("編集")
-  #     # 編集ページにアクセスすると、トップページへ移動する
-  #     visit edit_payment_path(@payment1)
-  #     expect(current_path).to eq root_path
-  #   end
-  #   it 'ログイン時でもペア登録ユーザーの投稿と他ユーザー投稿分は編集ができない' do
-  #     # トップページに移動する
-  #     visit root_path
-  #     # ログインを行う
-  #     sign_in(@payment1.user)
-  #     # 編集アイコンをクリック
-  #     find('img[id="lists-icon"]').click
-  #     binding.pry
-  #   end
-  # end
+  context '編集ができないとき' do
+    it 'ログインしていないと編集ページへ移動できない' do
+      # 未ログインの状態でトップページへ移動する
+      visit root_path
+      # 未ログインでは編集へのリンクが存在しない
+      expect(page).to have_no_content("編集")
+      # 編集ページにアクセスすると、トップページへ移動する
+      visit edit_payment_path(@payment1)
+      expect(current_path).to eq root_path
+    end
+    it 'ログイン時でもペア登録ユーザーの投稿分は編集ができない' do
+      # トップページに移動する
+      visit root_path
+      # ログインを行う
+      sign_in(@payment1.user)
+      # 編集アイコンをクリック
+      all('.right-content-icon')[1].click
+      # 編集という文字が表示されていない
+      expect(page).to have_no_link '編集', href: edit_payment_path(@payment2)
+      # 実際にペアユーザーの編集URLに移動すると、トップページに戻る
+      visit edit_payment_path(@payment2)
+      expect(current_path).to eq root_path
+    end
+  end
 end
