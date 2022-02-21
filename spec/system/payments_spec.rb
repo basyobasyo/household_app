@@ -56,9 +56,9 @@ end
 RSpec.describe "支払い情報編集", type: :system do
   # メインのユーザー、メインのユーザーのペア登録をするユーザー、ペア登録されていないユーザーを用意
   before do
-    @payment1 = FactoryBot.create(:payment)
-    @payment2 = FactoryBot.create(:payment)
-    @payment3 = FactoryBot.create(:payment)
+    @payment1 = FactoryBot.create(:payment) #メインユーザー
+    @payment2 = FactoryBot.create(:payment) #ペアユーザー
+    @payment3 = FactoryBot.create(:payment) #他ユーザー
 
     @payment1.update(registration_date: Date.today)
     @payment2.update(registration_date: Date.today)
@@ -133,6 +133,19 @@ RSpec.describe "支払い情報編集", type: :system do
       expect(page).to have_no_link '編集', href: edit_payment_path(@payment2)
       # 実際にペアユーザーの編集URLに移動すると、トップページに戻る
       visit edit_payment_path(@payment2)
+      expect(current_path).to eq root_path
+    end
+    it 'ログイン時でも他ユーザーの投稿分は編集ができない' do
+      # トップページへ移動する
+      visit root_path
+      # ログインをする
+      sign_in(@payment1.user)
+      # トップページに他ユーザーの投稿は表示されていない
+      expect(page).to have_no_content(@payment3.price)
+      expect(page).to have_no_content(@payment3.registration_date)
+      expect(page).to have_no_content(@payment3.category.name)
+      # 他ユーザーの投稿編集ページにアクセスすると、トップページへ遷移する
+      visit edit_payment_path(@payment3)
       expect(current_path).to eq root_path
     end
   end
