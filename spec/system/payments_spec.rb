@@ -15,9 +15,12 @@ RSpec.describe "支払い情報投稿", type: :system do
     end
     context '新規入力ができるとき' do
       it '全ての情報が正しく入力できている' do
-        # ログインを行う
+        # Basic認証のログインを行う
         basic_pass new_user_session_path
-        sign_in(@payment.user)
+        # トップページへ移動する
+        visit root_path
+        # ログインする
+       sign_in(@payment.user)
         # トップページに「新規入力画面へ」のリンクがある
         expect(page).to have_content("新規入力画面へ")
         # 新規入力画面へ移動する
@@ -73,8 +76,11 @@ RSpec.describe "支払い情報編集", type: :system do
   end
   context '投稿の編集ができるとき' do
     it 'ログインしたユーザーは自分の投稿した内容を編集できる' do
-      # ログインを行う
+      # Basic認証のログインを行う
       basic_pass new_user_session_path
+      # トップページへ移動する
+      visit root_path
+      # ログインする
       sign_in(@payment1.user)
       # 編集アイコンをクリック
         all('.right-content-icon')[0].click
@@ -114,7 +120,7 @@ RSpec.describe "支払い情報編集", type: :system do
   end
   context '編集ができないとき' do
     it 'ログインしていないと編集ページへ移動できない' do
-      # 未ログインの状態でトップページへ移動する
+      # トップページへ移動する
       visit root_path
       # 未ログインでは編集へのリンクが存在しない
       expect(page).to have_no_content("編集")
@@ -164,16 +170,17 @@ RSpec.describe "支払い情報削除", type: :system do
 
     @user2 = @payment2.user
     @user2.update(pair_id: @payment1.user.id)
-    
-    @sample = FactoryBot.build(:payment)
   end
   context '投稿の削除ができるとき' do
     it 'ログインしたユーザーは自分の投稿した内容を削除できる' do
-      # ログインを行う
+      # Basic認証のログインを行う
       basic_pass new_user_session_path
+      # トップページへ移動する
+      visit root_path
+      # ログインする
       sign_in(@payment1.user)
       # アイコンをクリック
-        all('.right-content-icon')[0].click
+      all('.right-content-icon')[0].click
       # ログインユーザーが投稿した項目に編集ボタンがある
       expect(page).to have_link '削除', href: payment_path(@payment1)
       # 削除ボタンを押し、Paymentテーブルのデータが１つ減る
@@ -188,8 +195,9 @@ RSpec.describe "支払い情報削除", type: :system do
   end
   context '編集ができないとき' do
     it 'ログインしていてもペアが入力した投稿を削除することはできない' do
-      # ログインの状態でトップページへ移動する
+      # トップページへ移動する
       visit root_path
+      # ログインする
       sign_in(@payment1.user)
       # ペアの投稿した編集アイコンをクリックする
       all('.right-content-icon')[1].click
@@ -197,11 +205,87 @@ RSpec.describe "支払い情報削除", type: :system do
       expect(page).to have_no_link '削除', href: payment_path(@payment2)
     end
     it 'ログイン時でも他ユーザーの投稿分は編集ができない' do
-      # ログイン状態でトップページへ移動する
+      # トップページへ移動する
       visit root_path
+      # ログインする
       sign_in(@payment1.user)
       # 他ユーザーの入力情報が表示されていない
       expect(page).to have_no_content(@payment3.price)
+    end
+  end
+end
+
+RSpec.describe "支払い情報詳細", type: :system do
+  # メインのユーザー、メインのユーザーのペア登録をするユーザー、ペア登録されていないユーザーを用意
+  before do
+    @payment1 = FactoryBot.create(:payment) #メインユーザー
+    @payment2 = FactoryBot.create(:payment) #ペアユーザー
+    @payment3 = FactoryBot.create(:payment) #他ユーザー
+
+    @payment1.update(registration_date: Date.today)
+    @payment2.update(registration_date: Date.today)
+
+    @user1 = @payment1.user
+    @user1.update(pair_id: @payment2.user.id)
+
+    @user2 = @payment2.user
+    @user2.update(pair_id: @payment1.user.id)
+  end
+  context '詳細ページが見ることができる' do
+    it '自分の投稿した内容は詳細を見ることができる' do
+      # Basic認証のログインを行う
+      basic_pass new_user_session_path
+      # トップページへ移動する
+      visit root_path
+      # ログインする
+      sign_in(@payment1.user)
+      # 投稿した編集ボタンをクリックする
+      all('.right-content-icon')[0].click
+      # 詳細ページへのリンクが存在する
+      expect(page).to have_link '詳細', href: payment_path(@payment1)
+      # 詳細ページへ移動する
+      visit payment_path(@payment1)
+      # 詳細ページに日付、カテゴリー、金額、備考が表示されている
+      expect(page).to have_content(@payment1.price)
+      expect(page).to have_content(@payment1.registration_date)
+      expect(page).to have_content(@payment1.category.name)
+      expect(page).to have_content(@payment1.memo)
+      # 詳細ページに編集ボタンと削除ボタンが存在する
+      expect(page).to have_link '編集', href: edit_payment_path(@payment1)
+      expect(page).to have_link '削除', href: payment_path(@payment1)
+    end
+    it 'ペア登録したユーザーが投稿した詳細ページを見ることができる' do
+      # トップページへ移動する
+      visit root_path
+      # ログインする
+      sign_in(@payment1.user)
+      # ペアユーザーが投稿した編集ボタンをクリックする
+      all('.right-content-icon')[1].click
+      # 詳細ページへのリンクが存在する
+      expect(page).to have_link '詳細', href: payment_path(@payment2)
+      # 詳細ページへ移動する
+      visit payment_path(@payment2)
+      # 詳細ページに日付、カテゴリー、金額、備考が表示されている
+      expect(page).to have_content(@payment2.price)
+      expect(page).to have_content(@payment2.registration_date)
+      expect(page).to have_content(@payment2.category.name)
+      expect(page).to have_content(@payment2.memo)
+      # 詳細ページに編集ボタンと削除ボタンが存在しない
+      expect(page).to have_no_link '編集', href: edit_payment_path(@payment2)
+      expect(page).to have_no_link '削除', href: payment_path(@payment2)
+    end
+  end
+  context '詳細ページを見ることができない' do
+    it '他ユーザーの詳細ページを閲覧することはできない' do
+      # トップページへ移動する
+      visit root_path
+      # ログインする
+      sign_in(@payment1.user)
+      # トップページには他ユーザーの投稿が表示されていない
+      expect(page).to have_no_content(@payment3.price)
+      # 他ユーザーの詳細ページへアクセスすると、トップページへ遷移する
+      visit payment_path(@payment3)
+      expect(current_path).to eq root_path
     end
   end
 end
