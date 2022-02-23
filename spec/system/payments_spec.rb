@@ -142,11 +142,66 @@ RSpec.describe "支払い情報編集", type: :system do
       sign_in(@payment1.user)
       # トップページに他ユーザーの投稿は表示されていない
       expect(page).to have_no_content(@payment3.price)
-      expect(page).to have_no_content(@payment3.registration_date)
-      expect(page).to have_no_content(@payment3.category.name)
       # 他ユーザーの投稿編集ページにアクセスすると、トップページへ遷移する
       visit edit_payment_path(@payment3)
       expect(current_path).to eq root_path
+    end
+  end
+end
+
+RSpec.describe "支払い情報削除", type: :system do
+  # メインのユーザー、メインのユーザーのペア登録をするユーザー、ペア登録されていないユーザーを用意
+  before do
+    @payment1 = FactoryBot.create(:payment) #メインユーザー
+    @payment2 = FactoryBot.create(:payment) #ペアユーザー
+    @payment3 = FactoryBot.create(:payment) #他ユーザー
+
+    @payment1.update(registration_date: Date.today)
+    @payment2.update(registration_date: Date.today)
+
+    @user1 = @payment1.user
+    @user1.update(pair_id: @payment2.user.id)
+
+    @user2 = @payment2.user
+    @user2.update(pair_id: @payment1.user.id)
+    
+    @sample = FactoryBot.build(:payment)
+  end
+  context '投稿の削除ができるとき' do
+    it 'ログインしたユーザーは自分の投稿した内容を削除できる' do
+      # ログインを行う
+      basic_pass new_user_session_path
+      sign_in(@payment1.user)
+      # アイコンをクリック
+        all('.right-content-icon')[0].click
+      # ログインユーザーが投稿した項目に編集ボタンがある
+      expect(page).to have_link '削除', href: payment_path(@payment1)
+      # 削除ボタンを押し、Paymentテーブルのデータが１つ減る
+      expect {
+        find_link('削除', href: payment_path(@payment1)).click
+        page.accept_confirm
+        expect(page).to have_no_content(@payment1.price)
+      }.to change{Payment.count}.by(-1)
+      # 削除後はトップページに移動している
+      expect(current_path).to eq root_path
+    end
+  end
+  context '編集ができないとき' do
+    it 'ログインしていてもペアが入力した投稿を削除することはできない' do
+      # ログインの状態でトップページへ移動する
+      visit root_path
+      sign_in(@payment1.user)
+      # ペアの投稿した編集アイコンをクリックする
+      all('.right-content-icon')[1].click
+      # 削除のリンクは存在しない
+      expect(page).to have_no_link '削除', href: payment_path(@payment2)
+    end
+    it 'ログイン時でも他ユーザーの投稿分は編集ができない' do
+      # ログイン状態でトップページへ移動する
+      visit root_path
+      sign_in(@payment1.user)
+      # 他ユーザーの入力情報が表示されていない
+      expect(page).to have_no_content(@payment3.price)
     end
   end
 end
