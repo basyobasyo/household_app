@@ -7,9 +7,11 @@ class PaymentsController < ApplicationController
     if user_signed_in?
       if current_user.pair_id
         pair_user = User.find(current_user.pair_id)
-        @payments = Payment.where(user_id: [current_user.id, pair_user.id]).where(registration_date: (30.days.ago)..(Time.now)).page(params[:page]).per(10).order('registration_date DESC')
-        main_payments = @payments.where(user_id: current_user.id)
-        pair_payments = @payments.where(user_id: pair_user.id)
+        all_payments = Payment.where(user_id: [current_user.id,
+                                               pair_user.id]).where(registration_date: (30.days.ago)..(Time.now))
+        @payments = all_payments.page(params[:page]).per(10).order('registration_date DESC')
+        main_payments = all_payments.where(user_id: current_user.id)
+        pair_payments = all_payments.where(user_id: pair_user.id)
         @main_result = result(main_payments)
         @pair_result = result(pair_payments)
       else
@@ -33,9 +35,7 @@ class PaymentsController < ApplicationController
 
   def show
     @payment = Payment.find(params[:id])
-    unless (@payment.user == current_user || @payment.user == current_user.pair)
-      redirect_to root_path
-    end
+    redirect_to root_path unless @payment.user == current_user || @payment.user == current_user.pair
   end
 
   def edit; end
@@ -113,9 +113,7 @@ class PaymentsController < ApplicationController
 
   def set_params
     @payment = Payment.find(params[:id])
-    if @payment.user != current_user
-      redirect_to root_path
-    end
+    redirect_to root_path if @payment.user != current_user
   end
 
   def result(data)
