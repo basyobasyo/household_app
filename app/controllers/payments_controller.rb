@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :pair_check, only: :index
+  before_action :pair_check, only: %i[index calculate_page]
   before_action :set_params, only: %i[edit update destroy]
   before_action :authenticate_user!, except: :index
 
@@ -66,7 +66,11 @@ class PaymentsController < ApplicationController
     redirect_to root_path
   end
 
-  def calculate_page; end
+  def calculate_page
+    unless @pair_check
+      redirect_to root_path
+    end
+  end
 
   def calculate_result
     date_from = params[:date_from]
