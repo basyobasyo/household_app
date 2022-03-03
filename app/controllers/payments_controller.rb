@@ -54,9 +54,9 @@ class PaymentsController < ApplicationController
   end
 
   def follow
-    @follow_id  = params[:follow_id]
-    @another_id = params[:another_id]
-    User.follow(@follow_id, @another_id)
+    if params[:follow_id] != "共有先を登録しましょう"
+      User.follow(params[:follow_id], params[:another_id])
+    end
     redirect_to root_path
   end
 

@@ -27,10 +27,8 @@ class User < ApplicationRecord
 
   # フォロー機能のメソッド
   def self.follow(follow_id, another_id)
-    user = User.find(follow_id)
-    another_user = User.find(another_id)
-    user.update(pair_id: another_id)
-    another_user.update(pair_id: follow_id)
+    User.find(follow_id).update(pair_id: another_id)
+    User.find(another_id).update(pair_id: follow_id)
   end
   # // フォロー機能のメソッド
 

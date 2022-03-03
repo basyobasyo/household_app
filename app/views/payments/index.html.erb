@@ -29,6 +29,15 @@
 </div>
 <%# //未ログイン時のトップページ %>
 <% else %>
+
+<%# エラーメッセージの表示 %>
+<div>
+  <% flash.each do |name, value| %>
+    <%= content_tag(:div, value, class: name) %>
+  <% end %>
+</div>
+<%# // エラーメッセージの表示 %>
+
 <div class="main-page">
   <div class="page-left">
 
