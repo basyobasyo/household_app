@@ -82,11 +82,11 @@ class PaymentsController < ApplicationController
       main_result = Payment.calculate(date_from, date_to, current_user.id)
       pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
       if main_result > pair_result
-        @pay_user     = User.find(current_user.pair_id)
-        @receive_user = User.find(current_user.id)
+        @pay_user     = current_user.pair
+        @receive_user = current_user
       elsif main_result < pair_result
-        @pay_user     = User.find(current_user.id)
-        @receive_user = User.find(current_user.pair_id)
+        @pay_user     = current_user
+        @receive_user = current_user.pair
       elsif main_result == 0 && pair_result == 0
         flash.now[:calculate_error] = '指定された期間に支払い情報がありませんでした。'
         render action: 'calculate_page'
@@ -125,6 +125,6 @@ class PaymentsController < ApplicationController
     data.each do |payment|
       result += payment[:price]
     end
-    result
+    return result
   end
 end
