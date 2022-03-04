@@ -7,7 +7,8 @@ class PaymentsController < ApplicationController
     if user_signed_in?
       if current_user.pair_id
         pair_user = User.find(current_user.pair_id)
-        all_payments, @payments, main_payments, pair_payments = Payment.find_payments_with_pair(current_user.id, pair_user.id, params[:page])
+        all_payments, @payments, main_payments, pair_payments = Payment.find_payments_with_pair(current_user.id,
+                                                                                                pair_user.id, params[:page])
         @main_result = Payment.result(main_payments)
         @pair_result = Payment.result(pair_payments)
       else

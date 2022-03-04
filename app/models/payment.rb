@@ -29,7 +29,7 @@ class Payment < ApplicationRecord
     payments = all_payments.page(page).per(10).order('registration_date DESC')
     main_payments = all_payments.where(user_id: user_id)
     pair_payments = all_payments.where(user_id: pair_id)
-    return payments, payments, main_payments, pair_payments
+    [payments, payments, main_payments, pair_payments]
   end
   # // ユーザーとペアユーザーの投稿情報を取得するメソッド
 
