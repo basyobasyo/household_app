@@ -7,15 +7,11 @@ class PaymentsController < ApplicationController
     if user_signed_in?
       if current_user.pair_id
         pair_user = User.find(current_user.pair_id)
-        all_payments = Payment.where(user_id: [current_user.id,
-                                               pair_user.id]).where(registration_date: (30.days.ago)..(Time.now))
-        @payments = all_payments.page(params[:page]).per(10).order('registration_date DESC')
-        main_payments = all_payments.where(user_id: current_user.id)
-        pair_payments = all_payments.where(user_id: pair_user.id)
-        @main_result = result(main_payments)
-        @pair_result = result(pair_payments)
+        all_payments, @payments, main_payments, pair_payments = Payment.find_payments_with_pair(current_user.id, pair_user.id, params[:page])
+        @main_result = Payment.result(main_payments)
+        @pair_result = Payment.result(pair_payments)
       else
-        @payments = Payment.where(user_id: current_user.id).where(registration_date: (30.days.ago)..(Time.now)).page(params[:page]).per(10).order('registration_date DESC')
+        @payments = Payment.find_payments_with_not_pair(current_user.id, params[:page])
       end
     end
   end
@@ -114,13 +110,5 @@ class PaymentsController < ApplicationController
   def set_params
     @payment = Payment.find(params[:id])
     redirect_to root_path if @payment.user != current_user
-  end
-
-  def result(data)
-    result = 0
-    data.each do |payment|
-      result += payment[:price]
-    end
-    result
   end
 end

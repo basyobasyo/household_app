@@ -22,4 +22,28 @@ class Payment < ApplicationRecord
     result
   end
   # //ユーザー一人に対する指定された期間の支払い合計を算出するメソッド
+
+  # ユーザーとペアユーザーの投稿情報を取得するメソッド
+  def self.find_payments_with_pair(user_id, pair_id, page)
+    all_payments = Payment.where(user_id: [user_id, pair_id]).where(registration_date: (30.days.ago)..(Time.now))
+    payments = all_payments.page(page).per(10).order('registration_date DESC')
+    main_payments = all_payments.where(user_id: user_id)
+    pair_payments = all_payments.where(user_id: pair_id)
+    return payments, payments, main_payments, pair_payments
+  end
+  # // ユーザーとペアユーザーの投稿情報を取得するメソッド
+
+  # ペアが存在しないユーザーの投稿情報を取得するメソッド
+  def self.find_payments_with_not_pair(user_id, page)
+    Payment.where(user_id: user_id).where(registration_date: (30.days.ago)..(Time.now)).page(page).per(10).order('registration_date DESC')
+  end
+  # // ペアが存在しないユーザーの投稿情報を取得するメソッド
+
+  def self.result(data)
+    result = 0
+    data.each do |payment|
+      result += payment[:price]
+    end
+    result
+  end
 end
