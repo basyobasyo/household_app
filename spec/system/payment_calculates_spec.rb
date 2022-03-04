@@ -42,7 +42,7 @@ RSpec.describe '精算機能', type: :system do
       # 精算結果表示ページへ遷移していることを確認
       expect(current_path).to eq calculate_result_payments_path
       # 精算結果が表示されている
-      expect(page).to have_content "精算結果出力ページ"
+      expect(page).to have_content '精算結果出力ページ'
     end
   end
   context '精算ができないとき' do
@@ -58,7 +58,7 @@ RSpec.describe '精算機能', type: :system do
       # 日付を入力せずに精算を行う
       find('input[name="commit"]').click
       # 精算ページにrenderされ、エラーメッセージが表示されている
-      expect(page).to have_content "精算ページ"
+      expect(page).to have_content '精算ページ'
       expect(page).to have_content '精算を行うことができませんでした。値が空では精算ができません。'
     end
     it 'ペア登録状態でも、期間の指定が誤っていると精算できない(日付の時系列が逆)' do
@@ -76,8 +76,8 @@ RSpec.describe '精算機能', type: :system do
       # 精算を行う
       find('input[name="commit"]').click
       # 精算ページに遷移し、エラーメッセージが表示されている
-      expect(page).to have_content "精算ページ"
-      expect(page).to have_content "精算を行うことができませんでした。正しく値を入力して下さい。"
+      expect(page).to have_content '精算ページ'
+      expect(page).to have_content '精算を行うことができませんでした。正しく値を入力して下さい。'
     end
     it 'ペア登録していない場合は精算ができない' do
       # トップページへ移動する
