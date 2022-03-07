@@ -93,6 +93,6 @@ RSpec.configure do |config|
   #   Kernel.srand config.seed
 end
 
-ENV["RAILS_ENV"] ||= 'test'
-require File.expand_path("../../config/environment", __FILE__)
+ENV['RAILS_ENV'] ||= 'test'
+require File.expand_path('../config/environment', __dir__)
 Capybara.javascript_driver = :selenium_chrome_headless

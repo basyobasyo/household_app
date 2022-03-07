@@ -7,15 +7,12 @@ class PaymentsController < ApplicationController
     if user_signed_in?
       if current_user.pair_id
         pair_user = User.find(current_user.pair_id)
-        all_payments = Payment.where(user_id: [current_user.id,
-                                               pair_user.id]).where(registration_date: (30.days.ago)..(Time.now))
-        @payments = all_payments.page(params[:page]).per(10).order('registration_date DESC')
-        main_payments = all_payments.where(user_id: current_user.id)
-        pair_payments = all_payments.where(user_id: pair_user.id)
-        @main_result = result(main_payments)
-        @pair_result = result(pair_payments)
+        all_payments, @payments, main_payments, pair_payments = Payment.find_payments_with_pair(current_user.id,
+                                                                                                pair_user.id, params[:page])
+        @main_result = Payment.result(main_payments)
+        @pair_result = Payment.result(pair_payments)
       else
-        @payments = Payment.where(user_id: current_user.id).where(registration_date: (30.days.ago)..(Time.now)).page(params[:page]).per(10).order('registration_date DESC')
+        @payments = Payment.find_payments_with_not_pair(current_user.id, params[:page])
       end
     end
   end
@@ -54,9 +51,7 @@ class PaymentsController < ApplicationController
   end
 
   def follow
-    @follow_id  = params[:follow_id]
-    @another_id = params[:another_id]
-    User.follow(@follow_id, @another_id)
+    User.follow(params[:follow_id], params[:another_id]) if params[:follow_id] != '共有先を登録しましょう'
     redirect_to root_path
   end
 
@@ -67,9 +62,7 @@ class PaymentsController < ApplicationController
   end
 
   def calculate_page
-    unless @pair_check
-      redirect_to root_path
-    end
+    redirect_to root_path unless @pair_check
   end
 
   def calculate_result
@@ -82,11 +75,11 @@ class PaymentsController < ApplicationController
       main_result = Payment.calculate(date_from, date_to, current_user.id)
       pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
       if main_result > pair_result
-        @pay_user     = User.find(current_user.pair_id)
-        @receive_user = User.find(current_user.id)
+        @pay_user     = current_user.pair
+        @receive_user = current_user
       elsif main_result < pair_result
-        @pay_user     = User.find(current_user.id)
-        @receive_user = User.find(current_user.pair_id)
+        @pay_user     = current_user
+        @receive_user = current_user.pair
       elsif main_result == 0 && pair_result == 0
         flash.now[:calculate_error] = '指定された期間に支払い情報がありませんでした。'
         render action: 'calculate_page'
@@ -118,13 +111,5 @@ class PaymentsController < ApplicationController
   def set_params
     @payment = Payment.find(params[:id])
     redirect_to root_path if @payment.user != current_user
-  end
-
-  def result(data)
-    result = 0
-    data.each do |payment|
-      result += payment[:price]
-    end
-    result
   end
 end

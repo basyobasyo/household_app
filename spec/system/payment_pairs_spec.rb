@@ -53,7 +53,7 @@ RSpec.describe 'ペア登録解除', type: :system do
     @payment3 = FactoryBot.create(:payment) # 他ユーザー
   end
   context 'ペア登録解除できるとき' do
-    it '既にペア登録している場合' ,js: true do 
+    it '既にペア登録している場合', js: true do
       # ペア登録をされている状態にする
       @user1 = @payment1.user
       @user1.update(pair_id: @payment2.user.id)
