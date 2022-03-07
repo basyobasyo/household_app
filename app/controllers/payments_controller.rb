@@ -74,7 +74,7 @@ class PaymentsController < ApplicationController
     elsif (Date.parse(date_to) - Date.parse(date_from)).to_i >= 0
       main_result = Payment.calculate(date_from, date_to, current_user.id)
       pair_result = Payment.calculate(date_from, date_to, current_user.pair_id)
-      if main_result >= pair_result
+      if main_result > pair_result
         @pay_user     = current_user.pair
         @receive_user = current_user
       elsif main_result < pair_result
